@@ -18,7 +18,7 @@ import java.util.*;
 @RequestMapping("/wwsw")
 public class HomeController {
 
-    private String Token = "yyqisgod";
+    private String Token = "yyqisgod"; //yl的TOKEN 123456789abcdef
     private static String text;
     private static String sendUsername;
 

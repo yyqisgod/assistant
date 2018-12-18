@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/wedding?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
-    username: yyq
-    password: 901001
+    url: jdbc:mysql://39.105.95.163:3306/wedding?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: Mypwd123!
     driver-class-name: com.mysql.cj.jdbc.Driver
   mvc:
     view:
