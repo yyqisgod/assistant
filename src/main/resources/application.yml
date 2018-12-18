@@ -12,10 +12,14 @@ spring:
       suffix: .jsp
       prefix: /
   profiles:
-    active: dev
+    active: prod
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.yyq.wedding.domain
   configuration:
     autoRuntimeDialect: true
+
+
+
+
