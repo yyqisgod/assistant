@@ -98,11 +98,11 @@
     <link rel="stylesheet" type="text/css" href="photos/dist/partialviewslider.min.css">
 </head>
 <body>
-    <ul id="partial-view" style="height: 100%;">
+    <ul  style="height: 100%;">
         <li>
-            <img src="imgs/1.jpg" />
+            <img src="imgs/timg.jpg" />
         </li>
-        <li>
+      <%--  <li>
             <img src="imgs/2.jpg" />
         </li>
         <li>
@@ -110,16 +110,16 @@
         </li>
         <li>
             <img src="imgs/4.jpg" />
-        </li>
+        </li>--%>
     </ul>
 
     <div id="danmu"></div>
-    <div id="input" style="position:absolute; left: 40%; top: 95% ;z-index:9999">
+   <%-- <div id="input" style="position:absolute; left: 40%; top: 95% ;z-index:9999">
         <button id="stop" class="btn btn-primary">停止</button>
         <button id="open" class="btn btn-primary">显示</button>
         <input type="text" class="form-control" name="" id="barrage_content" placeholder="添加弹幕内容">
         <button class="btn btn-primary" id="submit_barraget" style="margin-left: 1px">发送</button>
-    </div>
+    </div>--%>
 </body>
 <script src="jquery.min.js"></script>
 <script src="jquery.danmu.js-master/dist/jquery.danmu.min.js"></script>
