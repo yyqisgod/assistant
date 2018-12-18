@@ -99,11 +99,11 @@
     <link rel="stylesheet" type="text/css" href="photos/dist/partialviewslider.min.css">
 </head>
 <body>
-    <ul  style="height: 100%;">
+    <ul id="partial-view" style="height: 100%;">
         <li>
             <img src="imgs/timg.jpg" />
         </li>
-      <%--  <li>
+        <li>
             <img src="imgs/2.jpg" />
         </li>
         <li>
@@ -111,7 +111,7 @@
         </li>
         <li>
             <img src="imgs/4.jpg" />
-        </li>--%>
+        </li>
     </ul>
 
     <div id="danmu"></div>

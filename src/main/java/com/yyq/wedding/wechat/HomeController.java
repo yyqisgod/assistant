@@ -2,6 +2,9 @@ package com.yyq.wedding.wechat;
 
 import com.thoughtworks.xstream.XStream;
 import com.yyq.wedding.domain.Wechat;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +21,15 @@ import java.util.*;
 @RequestMapping("/wwsw")
 public class HomeController {
 
-    private String Token = "123456789abcdef"; //yl的TOKEN 123456789abcdef
+    @Value("${token}")
+    private String token;
     private static String text;
     private static String sendUsername;
 
     @RequestMapping(value = "chat", method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
     public void liaotian(Model model, HttpServletRequest request, HttpServletResponse response) {
+        System.out.println(token);
         response.setCharacterEncoding("UTF-8");
         System.out.println("进入chat");
         boolean isGet = request.getMethod().toLowerCase().equals("get");
@@ -67,7 +72,7 @@ public class HomeController {
         String nonce = request.getParameter("nonce");// 随机数
         String echostr = request.getParameter("echostr");// 随机字符串
         List<String> params = new ArrayList<String>();
-        params.add(Token);
+        params.add(token);
         params.add(timestamp);
         params.add(nonce);
         // 1. 将token、timestamp、nonce三个参数进行字典序排序
