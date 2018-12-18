@@ -11,6 +11,8 @@ spring:
     view:
       suffix: .jsp
       prefix: /
+  profiles:
+    active: dev
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
