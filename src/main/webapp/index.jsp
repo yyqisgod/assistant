@@ -187,8 +187,8 @@
     function getText() {
         $.get("/wwsw/sendText",function (data) {
             if(data.text!=null && data.text !="" && data.text+data.userId != msg+user &&msg!=undefined){
-                //获取弹幕内容
-                text=data.text;
+                //获取弹幕内容,前缀添加时间修饰
+                text=new Date().toLocaleString()+" "+data.text;
                 //随机获取颜色
                 var colors = ["white","red","grenn","blue","yellow","brown","purple","syan","gray"];
                 var size=Math.round(Math.random()*(colors.length-1));
