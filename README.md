@@ -13,6 +13,10 @@ maven:3.3.9 tomcat:8.5  jdk:1.8 项目clone推荐采用IDEA
 * 音乐播放器chome如果出现报错 ：<br>
     + 在浏览器输入  chrome://flags/#autoplay-policy <br>
     + 第一个选项 Autoplay policy  设置为 no user gesture is required <br>
+* logback日志说明 ：<br>
+    + logback-spring.xml中自定义springProfile的level------>>目前默认输出为Info级别<br>
+    + STDOUT为输出到控制台 fileInfoLog为引用上面的日志输出路径
+    + application.yml中profiles指定输出的类型
 
 
 
