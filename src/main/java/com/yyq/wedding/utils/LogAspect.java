@@ -32,16 +32,16 @@ public class LogAspect {
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
          HttpServletRequest request = attributes.getRequest();
-        logger.info("-------------------用户发起请求-----------------");
-        logger.info("IP : " + request.getRemoteAddr());
-        logger.info("请求方法: " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        logger.debug("-------------------用户发起请求-----------------");
+        logger.debug("IP : " + request.getRemoteAddr());
+        logger.debug("请求方法: " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
 
 
     }
 
     @AfterReturning(returning = "ret", pointcut = "webLog()")
     public void doAfterReturning(Object ret) throws Throwable {
-        logger.info("------------------请求结束------------------");
+        logger.debug("------------------请求结束------------------");
     }
 
 

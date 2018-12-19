@@ -14,6 +14,8 @@
             如果同时有<File>和<FileNamePattern>，那么当天日志是<File>，明天会自动把今天
             的日志改名为今天的日期。即，<File> 的日志都是当天的。
         -->
+        <!--日志输出路径 自己改一波就可以了-->
+        <file>./log/wedding/info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
             <FileNamePattern>/opt/logs/api/%d{yyyy-MM-dd}.log</FileNamePattern>
@@ -28,21 +30,6 @@
             <pattern>%d [%thread] %-5level %logger{36} %line - %msg%n</pattern>
         </encoder>
     </appender>
-    //添加不同文件夹的日志输出地点
-    <appender name="controllerLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--  <file>D:/ZM_Interface/CodeCloud_SX/test/log/controller/controller.log</file>-->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>opt/logs/api/controller/logs-%d{yyyy-MM-dd}.log</fileNamePattern>
-            <!--只保留最近90天的日志-->
-            <maxHistory>90</maxHistory>
-            <!--用来指定日志文件的上限大小，那么到了这个值，就会删除旧的日志-->
-            <totalSizeCap>1GB</totalSizeCap>
-        </rollingPolicy>
-        <encoder>
-            <charset>UTF-8</charset>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
-        </encoder>
-    </appender>
 
     <springProfile name="dev">
         <root level="info">
@@ -54,9 +41,5 @@
             <appender-ref ref="STDOUT"/>
             <appender-ref ref="fileInfoLog"/>
         </root>
-        //此处配置是将controllerLog于com.wintac.controller.api.plat包进行管理，只输出此包的日志
-        <logger name="com.yyq.wedding.wechat" level="INFO" additivity="false">
-            <appender-ref ref="controllerLog" />
-        </logger>
     </springProfile>
 </configuration>

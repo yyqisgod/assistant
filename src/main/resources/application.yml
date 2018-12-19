@@ -11,9 +11,9 @@ spring:
     view:
       suffix: .jsp
       prefix: /
+#日志输出环境 对应为logback-spring.xml的springProfile的name 目前默认生产环境 输出info级别到控制台和日志文件
   profiles:
     active: prod
-
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.yyq.wedding.domain
