@@ -133,6 +133,19 @@ public class HomeController {
 //        System.out.println("消息内容：" + inputMsg.getContent());
         logger.info("发送信息内容============="+inputMsg.getContent());
         text = inputMsg.getContent();
+        if(text.contains("傻逼")||text.contains("白痴")){
+            StringBuffer str = new StringBuffer();
+            str.append("<xml>");
+            str.append("<ToUserName><![CDATA[" + custermname + "]]></ToUserName>");
+            str.append("<FromUserName><![CDATA[" + servername + "]]></FromUserName>");
+            str.append("<CreateTime>" + returnTime + "</CreateTime>");
+            str.append("<MsgType><![CDATA[" + msgType + "]]></MsgType>");
+            str.append("<Content><![CDATA[婚礼现场！请注意您的素质！！]]></Content>");
+            str.append("</xml>");
+//        System.out.println(str.toString());
+            response.getWriter().write(str.toString());
+            return;
+        }
 //        System.out.println("消息Id：" + inputMsg.getMsgId());
 
         StringBuffer str = new StringBuffer();
