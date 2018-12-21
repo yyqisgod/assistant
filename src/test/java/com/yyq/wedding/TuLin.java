@@ -1,48 +1,95 @@
 package com.yyq.wedding;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-
 public class TuLin {
+
+
     /**
-     * 图灵测试
+     * 脑残版时间转换工具类
      * @throws Exception
      */
     @Test
-    public void test() throws Exception{
-        String APIKEY = "1e78ca133c39443e961fb27bc1c77f43";
-        String INFO = URLEncoder.encode("当前时间", "utf-8");//这里可以输入问题
-        String getURL = "http://www.tuling123.com/openapi/api?key=" + APIKEY + "&info=" + INFO;
-        URL getUrl = new URL(getURL);
-        HttpURLConnection connection = (HttpURLConnection) getUrl.openConnection();
-        connection.connect();
+    public void test1() throws Exception {
+        String time1 = "十二月 21, 2018";
+        System.out.println(zhuanhuan(time1));
 
-        // 取得输入流，并使用Reader读取
-        BufferedReader reader = new BufferedReader(new InputStreamReader( connection.getInputStream(), "utf-8"));
-        StringBuffer sb = new StringBuffer();
-        String line = "";
-        while ((line = reader.readLine())!= null) {
-            sb.append(line);
-        }
-        reader.close();
-        // 断开连接
-        connection.disconnect();
-        String[] ss = new String[10];
-        String s = sb.toString();
-       // System.out.println("完整代码"+s);
-        String answer;
-        if (s.contains("2018")){
-            ss = s.split("年");
-        }else {
-            ss = s.split(":");
-        }
-        answer = ss[ss.length-1];
-        answer = answer.substring(1,answer.length()-2);
-        System.out.println(answer);
+
     }
+//2018-12-21
+    public String zhuanhuan(String str) {
+        // System.out.println(str.substring(0,1));
+        //String month = str.substring(0, 1);
+        String riqi = null;
+        String year = null;
+        String month = StringUtils.substringBeforeLast(str, "月");
+        if(month.equals("十一")||month.equals("十二")){
+            riqi=str.substring(4, 6);
+            year = str.substring(8, 12);
+            if("十一".equals(month)){
+                month = "11";
+            }
+            if("十二".equals(month)){
+                month = "12";
+            }
+            String shuchu="输出==="+year+"-"+month+"-"+riqi;
+            return shuchu;
+        }
+
+        if("一".equals(month)|| "二".equals(month)|| "三".equals(month)|| "四".equals(month)|| "五".equals(month)|| "六".equals(month)||
+                "七".equals(month)|| "八".equals(month)||
+                "九".equals(month)||"十".equals(month) ||"十一".equals(month) ||"十二".equals(month)
+        ){
+            if("一".equals(month)){
+                month = "01";
+            }
+            if("二".equals(month)){
+                month = "02";
+            }
+            if("三".equals(month)){
+                month = "03";
+            }
+            if("四".equals(month)){
+                month = "04";
+            }
+            if("五".equals(month)){
+                month = "05";
+            }
+            if("六".equals(month)){
+                month = "06";
+            }
+            if("七".equals(month)){
+                month = "07";
+            }
+            if("八".equals(month)){
+                month = "08";
+            }
+            if("九".equals(month)){
+                month = "09";
+            }
+            if("十".equals(month)){
+                month = "10";
+            }
+            if("十一".equals(month)){
+                month = "11";
+            }
+            if("十二".equals(month)){
+                month = "12";
+            }
+            riqi = str.substring(3, 5);
+            year=str.substring(7, 11);
+            String shuchu="输出==="+year+"-"+month+"-"+riqi;
+            return shuchu;
+        }
+
+//        System.out.println(month);
+//        System.out.println("riqi=="+riqi);
+//        System.out.println("year==="+year);
+
+       return "格式错误";
+
+
+    }
+
+
 }
