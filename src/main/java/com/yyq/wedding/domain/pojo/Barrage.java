@@ -1,4 +1,4 @@
-package com.yyq.wedding.domain;
+package com.yyq.wedding.domain.pojo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -1,12 +1,10 @@
 package com.yyq.wedding.wechat;
 
 import com.thoughtworks.xstream.XStream;
-import com.yyq.wedding.domain.Wechat;
+import com.yyq.wedding.domain.pojo.Wechat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -124,16 +122,11 @@ public class HomeController {
         // 取得消息类型
         String msgType = inputMsg.getMsgType();
         // 根据消息类型获取对应的消息内容
-        //  if (msgType.equals(MsgType.Text.toString())) {
-        // 文本消息
-//        System.out.println("开发者微信号：" + inputMsg.getToUserName());
-//        System.out.println("发送方帐号：" + inputMsg.getFromUserName());
         sendUsername = inputMsg.getFromUserName();
-//        System.out.println("消息创建时间：" + inputMsg.getCreateTime() + new Date(createTime * 1000L));
-//        System.out.println("消息内容：" + inputMsg.getContent());
         logger.info("发送信息内容============="+inputMsg.getContent());
         text = inputMsg.getContent();
         if(text.contains("傻逼")||text.contains("白痴")){
+            text="新婚快乐";
             StringBuffer str = new StringBuffer();
             str.append("<xml>");
             str.append("<ToUserName><![CDATA[" + custermname + "]]></ToUserName>");
@@ -142,11 +135,9 @@ public class HomeController {
             str.append("<MsgType><![CDATA[" + msgType + "]]></MsgType>");
             str.append("<Content><![CDATA[婚礼现场！请注意您的素质！！]]></Content>");
             str.append("</xml>");
-//        System.out.println(str.toString());
             response.getWriter().write(str.toString());
             return;
         }
-//        System.out.println("消息Id：" + inputMsg.getMsgId());
 
         StringBuffer str = new StringBuffer();
         str.append("<xml>");
@@ -154,17 +145,14 @@ public class HomeController {
         str.append("<FromUserName><![CDATA[" + servername + "]]></FromUserName>");
         str.append("<CreateTime>" + returnTime + "</CreateTime>");
         str.append("<MsgType><![CDATA[" + msgType + "]]></MsgType>");
-        str.append("<Content><![CDATA[弹幕\"" + inputMsg.getContent() + "\"发送成功]]></Content>");
+        if (text.contains("/:") || text.contains("收到不支持的消息类型，暂无法显示")){
+            str.append("<Content><![CDATA[暂时不支持发送表情弹幕]]></Content>");
+            text="新婚快乐";
+        }else {
+            str.append("<Content><![CDATA[弹幕\"" + text + "\"发送成功]]></Content>");
+        }
         str.append("</xml>");
-//        System.out.println(str.toString());
         response.getWriter().write(str.toString());
-        // }
-        // 获取并返回多图片消息
-        // if (msgType.equals(MsgType.Image.toString())) {
-//        System.out.println("获取多媒体信息");
-//        System.out.println("多媒体文件id：" + inputMsg.getMediaId());
-//        System.out.println("图片链接：" + inputMsg.getPicUrl());
-//        System.out.println("消息id，64位整型：" + inputMsg.getMsgId());
 
         OutputMessage outputMsg = new OutputMessage();
         outputMsg.setFromUserName(servername);
@@ -174,9 +162,7 @@ public class HomeController {
         ImageMessage images = new ImageMessage();
         images.setMediaId(inputMsg.getMediaId());
         outputMsg.setImage(images);
-//        System.out.println("xml转换：/n" + xs.toXML(outputMsg));
         response.getWriter().write(xs.toXML(outputMsg));
-        // }
     }
 
     @RequestMapping("/sendText")

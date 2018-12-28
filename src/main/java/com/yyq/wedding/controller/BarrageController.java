@@ -1,6 +1,6 @@
 package com.yyq.wedding.controller;
 
-import com.yyq.wedding.domain.Barrage;
+import com.yyq.wedding.domain.pojo.Barrage;
 import com.yyq.wedding.service.IBarrageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
