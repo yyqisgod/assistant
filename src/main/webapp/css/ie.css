@@ -1,0 +1,29 @@
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////
+//Neon - Responsive Under Cunstruction Page
+/////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+/*text glow styles for IE*/
+
+.blue #logo,.blue p{
+filter:	progid:DXImageTransform.Microsoft.Glow(Color=#02AEFF, Strength=5); 
+}
+
+.red #logo,.red p{
+filter:	progid:DXImageTransform.Microsoft.Glow(Color=#ff0202, Strength=5); 
+}
+
+.purple #logo,.purple p{
+filter:	progid:DXImageTransform.Microsoft.Glow(Color=#fc02ff, Strength=5); 
+}
+
+.green #logo,.green p{
+filter:	progid:DXImageTransform.Microsoft.Glow(Color=#02ff08, Strength=5); 
+}
+
+
+/*text color for skin selector*/
+#blue-skin{color:#02AEFF}
+#red-skin{color:#ff0202}
+#purple-skin{color:#fc02ff}
+#green-skin{color:#02ff08}

@@ -115,12 +115,12 @@
     </ul>
 
     <div id="danmu"></div>
-   <%-- <div id="input" style="position:absolute; left: 40%; top: 95% ;z-index:9999">
-        <button id="stop" class="btn btn-primary">停止</button>
+    <div id="input" style="position:absolute; left: 40%; top: 95% ;z-index:9999">
+        <%--<button id="stop" class="btn btn-primary">停止</button>
         <button id="open" class="btn btn-primary">显示</button>
-        <input type="text" class="form-control" name="" id="barrage_content" placeholder="添加弹幕内容">
-        <button class="btn btn-primary" id="submit_barraget" style="margin-left: 1px">发送</button>
-    </div>--%>
+        <input type="text" class="form-control" name="" id="barrage_content" placeholder="添加弹幕内容">--%>
+        <button class="btn btn-primary" id="submit_barraget" style="margin-left: 200px">进入抽奖环节</button>
+    </div>
     <div style="display: none"  class="audio-box">
         <div class="audio-container">
             <div class="audio-cover"></div>
@@ -246,10 +246,11 @@
         $('#danmu').danmu('danmuStart');//运行
     });
 
-    //点击发送弹幕
+    //点击进去抽奖环节
     $("#submit_barraget").click(function () {
-        send_danmu();
-        $("#barrage_content").val("");
+        /*send_danmu();
+        $("#barrage_content").val("");*/
+        window.location.href="/luckydraw.jsp";
     })
     //回车发送弹幕
     $(window).keydown(function (e) {

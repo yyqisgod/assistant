@@ -1,0 +1,306 @@
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////
+//Neon - Responsive Under Cunstruction Page
+/////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+* {
+margin: 0;
+padding: 0;
+outline: 0;
+}
+
+/* reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin:0;
+	padding:0;
+	border:0;
+	font-size:100%;
+	font:inherit;
+	vertical-align: baseline;
+}
+
+/*neon font load*/
+@font-face {
+	font-family: 'Neon club music';
+	src: url('../font/NEONCLUBMUSIC.otf');
+}
+
+
+body{font-family:"Times New Roman",Georgia,Serif,sans-serif;
+color:#fff;
+text-align:center;
+}
+
+/*background patterns*/
+
+.bg1{background: #000 url(../img/bg.png);}
+.bg2{background: #000 url(../img/bg1.png);}
+.bg3{background: #000 url(../img/bg2.png);}
+.bg4{background: #000 url(../img/bg3.png);}
+
+
+/*disable test decoration from links*/
+a {
+text-decoration: none;
+color: white;
+text-transform: uppercase;
+}
+
+/*welcome message*/
+p{
+font-size: 32px;
+padding-top: 10%;
+text-transform: uppercase;
+}
+
+/*used for second ligne in welcome message*/
+p > span{
+	margin-top: 10px;
+	font-size: 22px;}
+
+/*main container*/
+#container{
+width: 800px;
+margin: 0 auto;
+}
+
+/* SKINS SELECTORS */
+
+.skins{font-size: 14px;
+text-transform: uppercase;}
+
+/* BLUE SKIN */
+.blue{
+text-shadow: 0 0 10px #02AEFF, 0 0 20px #02AEFF, 0 0 30px #02AEFF, 0 0 40px #02AEFF, 0 0 70px #02AEFF, 0 0 80px #02AEFF, 0 0 100px #02AEFF, 0 0 150px #02AEFF;
+}
+   /*blue circle png*/
+.blue .numbers{
+background: url(../img/blue/circle.png) no-repeat;
+}
+
+/*blue shadow for mail input*/
+
+.blue #mail-submit{border: 1px solid #02AEFF;background:#02AEFF;}
+   
+.blue #mail-input{
+box-shadow: 0 0 5px #02AEFF, 0 0 10px #02AEFF, 0 0 20px #02AEFF, 0 0 30px
+}
+
+.blue #mail-input:focus{
+box-shadow: 0 0 10px #02AEFF, 0 0 20px #02AEFF, 0 0 30px #02AEFF, 0 0 40px !important;
+}
+
+.blue #mail-input:hover{
+box-shadow: 0 0 5px #02AEFF, 0 0 10px #02AEFF, 0 0 20px #02AEFF, 0 0 30px 
+}
+	/*blue social png*/
+.blue #s-google{background-image: url(../img/blue/google-icon.png);}
+.blue #s-facebook{background-image: url(../img/blue/facebook-icon.png);}
+.blue #s-twitter{background-image: url(../img/blue/twitter-icon.png);}
+
+
+
+/* RED SKIN */
+
+.red{
+text-shadow: 0 0 10px #ff0202, 0 0 20px #ff0202, 0 0 30px #ff0202, 0 0 40px #ff0202, 0 0 70px #ff0202, 0 0 80px #ff0202, 0 0 100px #ff0202, 0 0 150px #ff0202;
+}
+
+.red .numbers{
+background: url(../img/red/circle.png) no-repeat;
+}
+
+.red #mail-submit{border: 1px solid #ff0202;background:#ff0202;}
+
+.red #mail-input{
+box-shadow: 0 0 5px #ff0202, 0 0 10px #ff0202, 0 0 20px #ff0202, 0 0 30px 
+}
+
+.red #mail-input:focus{
+box-shadow: 0 0 10px #ff0202, 0 0 20px #ff0202, 0 0 30px #ff0202, 0 0 40px !important;
+}
+
+.red #mail-input:hover{
+box-shadow: 0 0 5px #ff0202, 0 0 10px #ff0202, 0 0 20px #ff0202, 0 0 30px 
+}
+
+.red #s-google{background-image: url(../img/red/google-icon.png);}
+.red #s-facebook{background-image: url(../img/red/facebook-icon.png);}
+.red #s-twitter{background-image: url(../img/red/twitter-icon.png);}
+
+
+
+/* PURPLE SKIN */
+.purple{
+text-shadow: 0 0 10px #fc02ff, 0 0 20px #fc02ff, 0 0 30px #fc02ff, 0 0 40px #fc02ff, 0 0 70px #fc02ff, 0 0 80px #fc02ff, 0 0 100px #fc02ff, 0 0 150px #fc02ff;
+}
+
+.purple .numbers{
+background: url(../img/purple/circle.png) no-repeat;
+}
+
+.purple #mail-submit{border: 1px solid #fc02ff;background:#fc02ff;}
+
+.purple #mail-input{
+box-shadow: 0 0 5px #fc02ff, 0 0 10px #fc02ff, 0 0 20px #fc02ff, 0 0 30px 
+}
+
+.purple #mail-input:focus{
+box-shadow: 0 0 10px #ff0202, 0 0 20px #fc02ff, 0 0 30px #ff0202, 0 0 40px !important;
+}
+
+.purple #mail-input:hover{
+box-shadow: 0 0 5px #ff0202, 0 0 10px #fc02ff, 0 0 20px #ff0202, 0 0 30px 
+}
+
+.purple #s-google{background-image: url(../img/purple/google-icon.png);}
+.purple #s-facebook{background-image: url(../img/purple/facebook-icon.png);}
+.purple #s-twitter{background-image: url(../img/purple/twitter-icon.png);}
+
+
+
+
+/* GREEN SKIN */
+.green{
+text-shadow: 0 0 10px #02ff08, 0 0 20px #02ff08, 0 0 30px #02ff08, 0 0 40px #02ff08, 0 0 70px #02ff08, 0 0 80px #02ff08, 0 0 100px #02ff08, 0 0 150px #02ff08;
+}
+
+.green .numbers{
+background: url(../img/green/circle.png) no-repeat;
+}
+
+.green #mail-submit{border: 1px solid #02ff08;	background:#02ff08;}
+
+.green #mail-input{
+box-shadow: 0 0 5px #02ff08, 0 0 10px #02ff08, 0 0 20px #02ff08, 0 0 30px 
+}
+
+.green #mail-input:focus{
+box-shadow: 0 0 10px #02ff08, 0 0 20px #02ff08, 0 0 30px #02ff08, 0 0 40px !important;
+}
+
+.green #mail-input:hover{
+box-shadow: 0 0 5px #02ff08, 0 0 10px #02ff08, 0 0 20px #02ff08, 0 0 30px 
+}
+
+.green #s-google{background-image: url(../img/green/google-icon.png);}
+.green #s-facebook{background-image: url(../img/green/facebook-icon.png);}
+.green #s-twitter{background-image: url(../img/green/twitter-icon.png);}
+
+
+/* SOCIAL */
+#social {
+max-width: 100%;
+display: inline-table;
+margin-top: 10%;
+}
+
+#social > a {
+margin: -37px 8px 25px 5px;
+display: inline-block;
+width: 60px;
+height: 60px;
+background-position: 0px -35px;
+background-repeat: no-repeat;
+vertical-align: top;
+}
+
+#social > a:active {
+margin: -37px 8px 25px 5px;
+display: inline-block;
+width: 60px;
+height: 45px;
+background-position: -1px 10px;
+background-repeat: no-repeat;
+vertical-align: top;
+}
+
+/*logo style*/
+#logo{
+padding-top: 42px;
+text-align: center;
+font-size: 72px;
+}
+
+/* tools panel to change skin or background pattern*/
+
+
+#tools img{
+	background: black;
+	width:22px; height:22px;
+	border: 1px solid white;
+}
+
+#skins-select{
+	margin-bottom: 31px;
+}
+
+
+/* styles for count down numbers*/
+.numbers{
+width: 192px;
+height: 144px;
+padding-top: 65px;
+float: left;
+font-size: 40px;
+}
+
+/* styles for text under numbers*/
+.numbers span{
+	font-size:10px;
+	text-transform:uppercase;
+	display:block;
+	margin:0 0 0 0
+}
+
+#mail-input{
+	background:#fff;
+	width:422px;
+	height:30px;
+	font-size:17px;
+	border:0;
+	border-radius:5px;
+	padding-left: 15px;
+}
+
+
+#mail-submit{
+	color: white;
+	width:72px;
+	height:28px;
+	margin-left:-83px;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	cursor:pointer
+}
+
+
+
+/*.-------Responsive style---------*/
+
+/*Mobile phones 0 x 240*/
+@media only screen and (min-width: 0px) and (max-width: 319px) {
+	#logo{padding-top: 32px;margin-bottom: 32px; font-size: 60px}
+	p{font-size: 22px;}
+    #container{width:240px;}
+	#count{width:240px;margin-left: 10%;}
+	#mail-input{width:200px;}
+	#social {margin-top: 25%;}
+}
+
+/*iPhone portrait 320 x 480*/
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+   	p{font-size: 32px;}
+    #container{width:320px;}
+	#count{width:320px;margin-left: 20%;}
+	#mail-input{width:280px;}
+	#social {margin-top: 20%;}
+}
+
+/*Tablets */
+@media only screen and (min-width:481px) and (max-width:767px) {
+    #container{width:480px;}
+	#count{width:480px;margin-left: 10%;}
+	#mail-input{width:380px;}
+	#social {margin-top: 15%;}
+}
