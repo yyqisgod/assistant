@@ -50,21 +50,22 @@
     <p>抽奖环节倒计时<br/></p>
     <!-- WELCOME TEXT -->
 <div style="display: none">
-    <table id="zhongjiangtb" class="easyui-datagrid" title="                          恭喜以下热心网友中奖"
+    <%--暂时只获取一次--%>
+   <%-- <table id="zhongjiangtb" class="easyui-datagrid" title="                          恭喜以下热心网友中奖"
            style="width:800px;height:450px"
            pagination="true" data-options="singleSelect:true,url:'/wwsw/getCode',method:'get'"
            rownumbers="true" fitColumns="true">
         <thead>
         <tr>
             <th data-options="field:'id',width:10,align:'center'">中奖编号</th>
-            <%-- <th data-options="field:'name',width:20,align:'center'">姓名</th>
-             <th data-options="field:'age',width:10,align:'center'">年龄</th>--%>
+            &lt;%&ndash; <th data-options="field:'name',width:20,align:'center'">姓名</th>
+             <th data-options="field:'age',width:10,align:'center'">年龄</th>&ndash;%&gt;
         </tr>
         </thead>
-    </table>
+    </table>--%>
 </div>
     <br/>
-    <p>请大家发送 "何正波&xxx新婚快乐至订阅号"<br/></p><br/>
+    <p id="mynameP">请大家发送 <br/></p><br/>
     <!-- COUNTDOWN // html code generated in main.js -->
     <div id="count"></div>
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -82,8 +83,13 @@
 </body>
 
 <script type="text/javascript">
-    var seconds = 4;
-
+    var seconds = null;
+    $(function () {
+       $.get("/wwsw/getCode",function (result) {
+           seconds=result.time;
+           $("#mynameP").append(result.name+"至订阅号");
+       })
+    });
     //document.write("");
     function show_student163_time() {
         window.setTimeout("show_student163_time()", 1000);
