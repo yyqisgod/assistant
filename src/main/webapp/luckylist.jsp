@@ -20,7 +20,7 @@
 <body>
 <table id="zhongjiangtb" class="easyui-datagrid" title="                          恭喜以下热心网友中奖"
        style="width:800px;height:450px"
-       pagination="true" data-options="singleSelect:true,url:'/barrage/list',method:'get'"
+       pagination="true" data-options="singleSelect:true,url:'/wwsw/getCode',method:'get'"
        rownumbers="true" fitColumns="true">
     <thead>
     <tr>

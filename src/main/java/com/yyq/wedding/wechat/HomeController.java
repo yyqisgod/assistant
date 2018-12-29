@@ -218,6 +218,7 @@ public class HomeController {
     @ResponseBody
     public Map<String,Object> getCode() {
         currentTimeMillis = System.currentTimeMillis();
+        System.out.println("调用抽奖");
         Map<String,Object> map =new HashMap<>(3);
         Collections.shuffle(codeList);
         map.put("id",codeList );
