@@ -2,10 +2,10 @@
 wedding:
   #微信token配置
   token: yyqisgod
-  #设置抽奖时间，格式固定，年-月-日-时-分-抽奖持续时间（单位：分钟）
-  luckDrawTime: 2018-12-28-18-20-10
-  #设置抽奖时间指定发送的弹幕内容
-  luckDrawText: 哟哟哟
+  #设置抽奖持续时间（单位：秒）
+  luckDrawTimeOne: 120
+  #设置抽奖一期间指定发送的弹幕内容
+  luckDrawTextOne: 卢本伟牛逼
 
 
 

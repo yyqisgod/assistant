@@ -2,8 +2,10 @@ package com.yyq.wedding.wechat;
 
 import com.thoughtworks.xstream.XStream;
 import com.yyq.wedding.domain.pojo.Wechat;
+import com.yyq.wedding.service.ILuckDrawService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +23,23 @@ import java.util.*;
 @RequestMapping("/wwsw")
 public class HomeController {
 
+    private final ILuckDrawService luckDrawService;
+
+    @Autowired
+    public HomeController(ILuckDrawService luckDrawService) {
+        this.luckDrawService = luckDrawService;
+    }
+
     @Value("${token}")
     private String token;
-    @Value("${luckDrawTime}")
-    private String luckDrawTime;//指定抽奖时间
+    @Value("${luckDrawTimeOne}")
+    private String luckDrawTimeOne;//指定抽奖一持续时间
+    @Value("${luckDrawTextOne}")
+    private String luckDrawTextOne;//指定抽奖一需要发送的弹幕
     private static String text;
     private static String sendUsername;
+    private static List<Integer> codeList = new ArrayList<>();
+    private static long currentTimeMillis;
     private Logger logger = LoggerFactory.getLogger(getClass().getName());//日志
 
     @RequestMapping(value = "chat", method = {RequestMethod.GET, RequestMethod.POST})
@@ -130,16 +143,28 @@ public class HomeController {
         text = inputMsg.getContent();
         if (text.contains("傻逼") || text.contains("白痴")) {
             text = "新婚快乐";
-            StringBuffer str = new StringBuffer();
-            str.append("<xml>");
-            str.append("<ToUserName><![CDATA[" + custermname + "]]></ToUserName>");
-            str.append("<FromUserName><![CDATA[" + servername + "]]></FromUserName>");
-            str.append("<CreateTime>" + returnTime + "</CreateTime>");
-            str.append("<MsgType><![CDATA[" + msgType + "]]></MsgType>");
-            str.append("<Content><![CDATA[婚礼现场！请注意您的素质！！]]></Content>");
-            str.append("</xml>");
-            response.getWriter().write(str.toString());
+            String content = "婚礼现场！请注意您的素质！！";
+            appendXML(response, servername, custermname, returnTime, msgType, content);
             return;
+        }
+
+        //抽奖一
+        Long endTime = currentTimeMillis + Long.parseLong(luckDrawTimeOne);
+        if (luckDrawTextOne.equals(text)) {
+            if (currentTimeMillis <= endTime) {
+                //判断该用户在该期间重复发送过指定弹幕没有，没有将抽奖码存入数据库并返回
+                int code = luckDrawService.lotteryCode(sendUsername);
+                if (code != -1) {
+                    String content="感谢你的祝福，你的抽奖码是"+code+",请妥善保存";
+                    appendXML(response, servername, custermname, returnTime, msgType, content);
+                    codeList.add(code);
+                }
+                return;
+            } else {
+                String content = "未到抽奖时间，不能参与抽奖，请到时准时参与";
+                appendXML(response, servername, custermname, returnTime, msgType, content);
+                return;
+            }
         }
 
         StringBuffer str = new StringBuffer();
@@ -168,6 +193,18 @@ public class HomeController {
         response.getWriter().write(xs.toXML(outputMsg));
     }
 
+    private void appendXML(HttpServletResponse response, String servername, String custermname, Long returnTime, String msgType, String content) throws IOException {
+        StringBuffer str = new StringBuffer();
+        str.append("<xml>");
+        str.append("<ToUserName><![CDATA[" + custermname + "]]></ToUserName>");
+        str.append("<FromUserName><![CDATA[" + servername + "]]></FromUserName>");
+        str.append("<CreateTime>" + returnTime + "</CreateTime>");
+        str.append("<MsgType><![CDATA[" + msgType + "]]></MsgType>");
+        str.append("<Content><![CDATA[" + content + "]]></Content>");
+        str.append("</xml>");
+        response.getWriter().write(str.toString());
+    }
+
     @RequestMapping("/sendText")
     @ResponseBody
     public Wechat sendText() {
@@ -175,5 +212,17 @@ public class HomeController {
         wechat.setText(text);
         wechat.setUserId(sendUsername);
         return wechat;
+    }
+
+    @RequestMapping("/getCode")
+    @ResponseBody
+    public Map<String,Object> getCode() {
+        currentTimeMillis = System.currentTimeMillis();
+        Map<String,Object> map =new HashMap<>(3);
+        Collections.shuffle(codeList);
+        map.put("id",codeList );
+        map.put("name",luckDrawTextOne);
+        map.put("time",luckDrawTimeOne);
+        return map;
     }
 }
