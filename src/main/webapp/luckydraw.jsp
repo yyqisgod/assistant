@@ -39,21 +39,35 @@
     <br />
     <p>请大家发送  "何正波&xxx新婚快乐至订阅号"<br /></p><br />
     <!-- COUNTDOWN // html code generated in main.js -->
-    <div id="count"></div>
+    <div id="count"></div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <!-- /COUNTDOWN  -->
+    <table id="zhongjiangtb" style="margin-left: 320px;font-size: 40px;display: none" >
+        <tbody>
+        <tr  >
+            <td >中奖名单编号</td>
+        </tr>
+        <tr>
+            <td>2000001</td>
+        </tr>
+        <tr>
+            <td>2000045</td>
 
-
-
+        </tr>
+        <tr>
+            <td>2000046</td>
+        </tr>
+        </tbody>
+    </table>
+    <p id="chigua" style="display: none">恭喜以上吃瓜群众中奖<br /></p><br />
 
 </section>
-
 <!--JS FILES LOAD-->
 <script src="script/jquery.min.js" type="text/javascript"></script>
 <script src="script/jcountdown.min.js" type="text/javascript"></script>
 <script src="script/main.js" type="text/javascript"></script>
 
 <SCRIPT language=javascript>
-    var seconds=60;
+    var seconds=4;
     //document.write("");
     function show_student163_time(){
         window.setTimeout("show_student163_time()", 1000);
@@ -76,7 +90,10 @@
         document.getElementById("sec-count").innerHTML=seconds + "<span class=\"days-label\">秒</span>";
         //当倒计数完成后--->跳转到中奖名单页面
         if (seconds==0){
-            window.location.href="/luckylist.jsp";
+            //window.location.href="/luckylist.jsp";
+            document.getElementById("zhongjiangtb").style.display="block";
+            document.getElementById("chigua").style.display="block";
+            document.getElementById("sec-count").style.display="none";
         }
     }
 

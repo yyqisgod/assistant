@@ -12,7 +12,7 @@ $(document).ready(function() {
 		date: "7 31, 2013",  
 		//html code in count div here.
 		//<div id='days-count' class='numbers'>%{d}<span class='days-label'>days</span></div> <div id='hours-count' class='numbers'>%{h}<span class='hours-label'>hours</span></div><div id='min-count' class='numbers'>%{m}<span class='min-label'>min</span></div>
-		htmlTemplate: "<div style='margin-left: 300px' id='sec-count' class='numbers'>%{s}<span class='sec-label'>sec</span></div>"
+		htmlTemplate: "<div style='margin-left: 300px;display: block' id='sec-count' class='numbers'>%{s}<span class='sec-label'>sec</span></div>"
 	});
 });
 
