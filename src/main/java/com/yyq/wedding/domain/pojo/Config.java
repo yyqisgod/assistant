@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "wedding")
 @Data
-@PropertySource("config.yml")
+@PropertySource(value = "config.yml", ignoreResourceNotFound = true, encoding = "utf-8")
 public class Config {
     @ApiModelProperty(value = "微信token全局配置")
     private String token;
