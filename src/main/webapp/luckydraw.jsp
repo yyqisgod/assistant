@@ -85,7 +85,7 @@
 <script type="text/javascript">
     var seconds = null;
     $(function () {
-       $.get("/wwsw/getCode",function (result) {
+       $.get("/wwsw/msg",function (result) {
            seconds=result.time;
            $("#mynameP").append(result.name+"至订阅号");
        })

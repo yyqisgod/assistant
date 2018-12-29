@@ -1,6 +1,7 @@
 package com.yyq.wedding.wechat;
 
 import com.thoughtworks.xstream.XStream;
+import com.yyq.wedding.domain.pojo.LuckDraw;
 import com.yyq.wedding.domain.pojo.Wechat;
 import com.yyq.wedding.service.ILuckDrawService;
 import org.slf4j.Logger;
@@ -33,13 +34,14 @@ public class HomeController {
     @Value("${token}")
     private String token;
     @Value("${luckDrawTimeOne}")
-    private String luckDrawTimeOne;//指定抽奖一持续时间
+    private long luckDrawTimeOne;//指定抽奖一持续时间
     @Value("${luckDrawTextOne}")
     private String luckDrawTextOne;//指定抽奖一需要发送的弹幕
     private static String text;
     private static String sendUsername;
-    private static List<Integer> codeList = new ArrayList<>();
+    private static List<Long> codeList = new ArrayList<>();
     private static long currentTimeMillis;
+    private static long endTime;
     private Logger logger = LoggerFactory.getLogger(getClass().getName());//日志
 
     @RequestMapping(value = "chat", method = {RequestMethod.GET, RequestMethod.POST})
@@ -149,15 +151,21 @@ public class HomeController {
         }
 
         //抽奖一
-        Long endTime = currentTimeMillis + Long.parseLong(luckDrawTimeOne);
+        System.out.println(currentTimeMillis);
+        System.out.println(endTime);
         if (luckDrawTextOne.equals(text)) {
-            if (currentTimeMillis <= endTime) {
+            if (currentTimeMillis <= endTime && currentTimeMillis != 0) {
                 //判断该用户在该期间重复发送过指定弹幕没有，没有将抽奖码存入数据库并返回
-                int code = luckDrawService.lotteryCode(sendUsername);
+                LuckDraw luckDraw = new LuckDraw();
+                luckDraw.setUserId(sendUsername);
+                long code = luckDrawService.lotteryCode(luckDraw);
                 if (code != -1) {
-                    String content="感谢你的祝福，你的抽奖码是"+code+",请妥善保存";
+                    String content = "感谢你的祝福，你的抽奖码是\"" + code + "\"，请妥善保存";
                     appendXML(response, servername, custermname, returnTime, msgType, content);
                     codeList.add(code);
+                } else {
+                    String content = "活动期间抽奖码只能获取一次哦";
+                    appendXML(response, servername, custermname, returnTime, msgType, content);
                 }
                 return;
             } else {
@@ -216,14 +224,27 @@ public class HomeController {
 
     @RequestMapping("/getCode")
     @ResponseBody
-    public Map<String,Object> getCode() {
-        currentTimeMillis = System.currentTimeMillis();
-        System.out.println("调用抽奖");
-        Map<String,Object> map =new HashMap<>(3);
+    public Map<String, Object> getCode() throws InterruptedException {
+        for (int i = 0; i < luckDrawTimeOne; i++) {
+            currentTimeMillis = System.currentTimeMillis();
+            if (i == 0) {
+                endTime = currentTimeMillis + (luckDrawTimeOne-1)*1000;
+            }
+            Thread.sleep(1000);
+            System.out.println(i);
+        }
+        Map<String, Object> map = new HashMap<>(3);
         Collections.shuffle(codeList);
-        map.put("id",codeList );
-        map.put("name",luckDrawTextOne);
-        map.put("time",luckDrawTimeOne);
+        map.put("id", codeList);
+        return map;
+    }
+
+    @RequestMapping("/msg")
+    @ResponseBody
+    public Map<String, Object> msg() {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("name", luckDrawTextOne);
+        map.put("time", luckDrawTimeOne);
         return map;
     }
 }

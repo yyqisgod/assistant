@@ -14,11 +14,11 @@ public interface LuckDrawMapper {
      * 根据用户id获取抽奖码
      * @return
      */
-    LuckDraw getOneByUserId(String userId);
+    LuckDraw getOneByUserId(LuckDraw luckDraw);
 
     /**
      * 将用户id存入数据库并返回对应的id
-     * @param userId
+     * @param luckDraw
      */
-    int save(String userId);
+    int save(LuckDraw luckDraw);
 }

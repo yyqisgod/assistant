@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yyq.wedding.dao.LuckDrawMapper" >
-    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.yyq.wedding.domain.pojo.LuckDraw">
         INSERT INTO luckdraw(user_id) VALUES(#{userId})
     </insert>
 
-    <select id="getOneByUserId" resultType="com.yyq.wedding.domain.pojo.LuckDraw">
+    <select id="getOneByUserId" resultType="com.yyq.wedding.domain.pojo.LuckDraw" parameterType="com.yyq.wedding.domain.pojo.LuckDraw">
         SELECT
             *
         FROM

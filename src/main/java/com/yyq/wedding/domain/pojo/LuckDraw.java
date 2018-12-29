@@ -15,5 +15,5 @@ public class LuckDraw {
     private Long id;
 
     @ApiModelProperty(value = "用户唯一Id")
-    private Long userId;
+    private String userId;
 }

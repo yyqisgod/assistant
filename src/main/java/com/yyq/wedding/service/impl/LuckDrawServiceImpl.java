@@ -24,11 +24,12 @@ public class LuckDrawServiceImpl implements ILuckDrawService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int lotteryCode(String userId) {
-        LuckDraw luckDrawOne = luckDrawMapper.getOneByUserId(userId);
+    public long lotteryCode(LuckDraw luckDraw) {
+        LuckDraw luckDrawOne = luckDrawMapper.getOneByUserId(luckDraw);
         if (luckDrawOne == null){
             //添加到数据库并返回对应id
-            return luckDrawMapper.save(userId);
+            luckDrawMapper.save(luckDraw);
+            return luckDraw.getId();
         }
         return -1;
     }

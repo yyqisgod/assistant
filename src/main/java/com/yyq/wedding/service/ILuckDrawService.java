@@ -1,5 +1,7 @@
 package com.yyq.wedding.service;
 
+import com.yyq.wedding.domain.pojo.LuckDraw;
+
 /**
  * @author: 布里巴
  * @review:
@@ -10,5 +12,5 @@ public interface ILuckDrawService {
      * 获取抽奖一的抽奖码
      * @return
      */
-    int lotteryCode(String userId);
+    long lotteryCode(LuckDraw luckDraw);
 }
