@@ -17,9 +17,9 @@
     <a href="#" id='show-hide'>+</a>
     <div id="tools" style="display:none;">
         <div id="skins-select">
+            <a href="#" class="purple skins" id="purple-skin">紫</a>
             <a href="#" class="blue skins" id="blue-skin">蓝</a>
             <a href="#" class="red skins" id="red-skin">红</a>
-            <a href="#" class="purple skins" id="purple-skin">紫</a>
             <a href="#" class="green skins" id="green-skin">绿</a>
         </div>
         <div id="pattern-select">
@@ -33,11 +33,11 @@
 
     <br />
     <!-- WELCOME TEXT -->
-    <p>抽奖环节倒计时<br /><span>Please look forward to.</span></p>
+    <p>抽奖环节倒计时<br /></p>
     <!-- WELCOME TEXT -->
 
     <br />
-
+    <p>请大家发送  "何正波&xxx新婚快乐至订阅号"<br /></p><br />
     <!-- COUNTDOWN // html code generated in main.js -->
     <div id="count"></div>
     <!-- /COUNTDOWN  -->
@@ -53,7 +53,7 @@
 <script src="script/main.js" type="text/javascript"></script>
 
 <SCRIPT language=javascript>
-    var seconds=61;
+    var seconds=60;
     //document.write("");
     function show_student163_time(){
         window.setTimeout("show_student163_time()", 1000);
@@ -74,7 +74,12 @@
         //document.getElementById("hours-count").innerHTML=hrsold  + "<span class=\"days-label\">时</span>";
         //document.getElementById("min-count").innerHTML=minsold + "<span class=\"days-label\">分</span>";
         document.getElementById("sec-count").innerHTML=seconds + "<span class=\"days-label\">秒</span>";
+        //当倒计数完成后--->跳转到中奖名单页面
+        if (seconds==0){
+            window.location.href="/luckylist.jsp";
+        }
     }
+
     show_student163_time();
 </SCRIPT>
 </body>
