@@ -119,7 +119,7 @@
         <%--<button id="stop" class="btn btn-primary">停止</button>
         <button id="open" class="btn btn-primary">显示</button>
         <input type="text" class="form-control" name="" id="barrage_content" placeholder="添加弹幕内容">--%>
-        <button class="btn btn-primary" id="submit_barraget" style="margin-left: 200px">进入抽奖环节</button>
+        <button class="btn btn-primary" id="submit_barraget" style="margin-left: 99px">进入抽奖环节</button>
     </div>
     <div style="display: none"  class="audio-box">
         <div class="audio-container">
