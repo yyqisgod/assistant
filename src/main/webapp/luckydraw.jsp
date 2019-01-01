@@ -84,7 +84,7 @@
     $(function () {
        $.get("/wwsw/msg",function (result) {
            seconds=result.time;
-           $("#mynameP").append(result.name+"至订阅号");
+           $("#mynameP").append("\""+result.name+"\" <br />至订阅号参与抽奖");
        })
     });
     window.onload=function () {

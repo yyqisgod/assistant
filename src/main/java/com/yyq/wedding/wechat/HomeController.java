@@ -151,8 +151,6 @@ public class HomeController {
         }
 
         //抽奖一
-        System.out.println(currentTimeMillis);
-        System.out.println(endTime);
         if (luckDrawTextOne.equals(text)) {
             if (currentTimeMillis <= endTime && currentTimeMillis != 0) {
                 //判断该用户在该期间重复发送过指定弹幕没有，没有将抽奖码存入数据库并返回
@@ -231,7 +229,6 @@ public class HomeController {
                 endTime = currentTimeMillis + (luckDrawTimeOne-1)*1000;
             }
             Thread.sleep(1000);
-            System.out.println(i);
         }
         Map<String, Object> map = new HashMap<>(3);
         Collections.shuffle(codeList);

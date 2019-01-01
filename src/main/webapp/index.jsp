@@ -250,7 +250,7 @@
     $("#submit_barraget").click(function () {
         /*send_danmu();
         $("#barrage_content").val("");*/
-        window.location.href="/luckydraw.jsp";
+        window.open("/luckydraw.jsp");
     })
     //回车发送弹幕
     $(window).keydown(function (e) {
