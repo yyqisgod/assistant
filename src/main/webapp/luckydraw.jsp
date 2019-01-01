@@ -49,7 +49,6 @@
     <!-- WELCOME TEXT -->
     <p>抽奖环节倒计时<br/></p>
     <!-- WELCOME TEXT -->
-<div style="display: none">
     <%--暂时只获取一次--%>
    <%-- <table id="zhongjiangtb" class="easyui-datagrid" title="                          恭喜以下热心网友中奖"
            style="width:800px;height:450px"
@@ -63,15 +62,13 @@
         </tr>
         </thead>
     </table>--%>
-</div>
     <br/>
     <p id="mynameP">请大家发送 <br/></p><br/>
     <!-- COUNTDOWN // html code generated in main.js -->
     <div id="count"></div>
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <!-- /COUNTDOWN  -->
-
-
+    <%--默认消失 秒数==0的时候出来-%>
+    <p id="MyList" style="display: none">中奖名单是:</p>
 
 
 </section>
@@ -90,6 +87,11 @@
            $("#mynameP").append(result.name+"至订阅号");
        })
     });
+    window.onload=function () {
+        $.get("/wwsw/getCode",function (obj) {
+            $("#MyList").append(obj.id+" ");
+        })
+    };
     //document.write("");
     function show_student163_time() {
         window.setTimeout("show_student163_time()", 1000);
@@ -110,12 +112,11 @@
         //document.getElementById("hours-count").innerHTML=hrsold  + "<span class=\"days-label\">时</span>";
         //document.getElementById("min-count").innerHTML=minsold + "<span class=\"days-label\">分</span>";
         document.getElementById("sec-count").innerHTML=seconds + "<span class=\"days-label\">秒</span>";
-        //当倒计数完成后--->跳转到中奖名单页面
-        if (seconds == 0) {
-            window.location.href="/luckylist.jsp";
-            //     document.getElementById("zhongjiangtb").datagrid('reload');
-            //     document.getElementById("chigua").style.display="block";
-            //     document.getElementById("sec-count").style.display="none";
+        //倒计数结束后---展示中奖信息
+       if (seconds == 0) {
+           //让倒计数消失
+           $("#sec-count").attr("style","display: none");
+            $("#MyList").attr("style","display: block"); //结束后让P标签出来
         }
     }
 
