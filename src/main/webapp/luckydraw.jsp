@@ -67,7 +67,7 @@
     <!-- COUNTDOWN // html code generated in main.js -->
     <div id="count"></div>
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <%--默认消失 秒数==0的时候出来-%>
+   <%-- &lt;%&ndash;默认消失 秒数==0的时候出来-%>--%>
     <p id="MyList" style="display: none">中奖名单是:</p>
 
 
