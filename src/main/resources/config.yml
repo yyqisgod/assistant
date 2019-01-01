@@ -1,7 +1,7 @@
 #全局配置文件，该文件不提交
 wedding:
   #微信token配置
-  token: yyqisgod
+  token: 123456789abcdef
   #设置抽奖持续时间（单位：秒）
   luckDrawTimeOne: 10
   #设置抽奖一期间指定发送的弹幕内容
