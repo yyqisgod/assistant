@@ -7,22 +7,12 @@
 
     <!--[if IE]>
     <link rel="stylesheet" type="text/css" href="css/ie.css"/><![endif]-->
-    <title>sc.chinaz.com</title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=" UTF-8
-    " />
+    <meta http-equiv="Content-Type" content="text/html; charset="utf-8" />
 </head>
-<link rel="stylesheet" type="text/css" href="./easyui/themes/default/easyui.css">
-<!-- easyui的系统图标-->
-<link rel="stylesheet" type="text/css" href="./easyui/themes/icon.css">
-<!-- 引入颜色的样式 -->
-<link rel="stylesheet" type="text/css" href="./easyui/themes/color.css">
-<!-- easyui依赖的jquery库-->
-<script type="text/javascript" src="./easyui/jquery.min.js"></script>
-<!-- easyui的插件库-->
-<script type="text/javascript" src="./easyui/jquery.easyui.min.js"></script>
-<!-- easyui的汉化包 -->
-<script type="text/javascript" src="./easyui/locale/easyui-lang-zh_CN.js"></script>
+<script src="./js/layui.js" charset="utf-8"></script>
+<script src="script/jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="./css/layui.css"  media="all">
 <body>
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <section id="container" class="blue">
@@ -55,11 +45,63 @@
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
    <%-- &lt;%&ndash;默认消失 秒数==0的时候出来-%>--%>
     <p id="MyList" style="display: none">中奖名单是:</p>
+    <%--进度条--%>
+<div id="Mydiv" style="display: none">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>计算抽奖中奖名单中...</legend>
+    </fieldset>
 
+    <div class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="demo">
+        <div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
+    </div>
 
+    <div class="site-demo-button" style="margin-top: 20px; margin-bottom: 0;display: none">
+        <button  class="layui-btn site-demo-active" data-type="setPercent">设置50%</button>
+        <button id="MyButton" class="layui-btn site-demo-active" data-type="loading">模拟loading</button>
+    </div>
+</div>
 </section>
-<!--JS FILES LOAD-->
-<script src="script/jquery.min.js" type="text/javascript"></script>
+<script>
+    layui.use('element', function(){
+        var $ = layui.jquery
+            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+            //让进度条突然走到50% 没啥用
+            setPercent: function(){
+                //设置50%进度
+                element.progress('demo', '50%')
+            }
+            //动态加载进度条
+            ,loading: function(othis){
+                var DISABLED = 'layui-btn-disabled';
+                if(othis.hasClass(DISABLED)) return;
+                var n= 0;
+                //模拟loading
+                    timer = setInterval(function(){
+                    n = n + Math.random()*40|0;
+                    if(n>100){
+                        n = 100;
+                        layer.closeAll();
+                        clearInterval(timer);
+                        othis.removeClass(DISABLED);
+                    }
+                    element.progress('demo', n+'%');
+                }, 300+Math.random()*1000);
+
+                othis.addClass(DISABLED);
+            }
+        };
+
+        $('.site-demo-active').on('click', function(){
+            var othis = $(this), type = $(this).data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+    });
+</script>
+
+
 <script src="script/jcountdown.min.js" type="text/javascript"></script>
 <script src="script/main.js" type="text/javascript"></script>
 
@@ -102,7 +144,16 @@
        if (seconds == 0) {
            //让倒计数消失
            $("#sec-count").attr("style","display: none");
-            $("#MyList").attr("style","display: block"); //结束后让P标签出来
+            //结束后让P标签出来
+           $("#Mydiv").attr("style","display: block");
+           //当秒数==0的时候 点击一下进度条模拟一波
+            $("#MyButton").click();
+            //延迟大概10s后 让进度条消失，并且展示中奖List
+           setTimeout(function () {
+               $("#Mydiv").attr("style","display: none");
+               $("#MyList").attr("style","display: block");
+           },10000);
+
         }
     }
 
