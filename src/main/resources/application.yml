@@ -1,6 +1,5 @@
 server:
   port: 80
-
 spring:
   datasource:
     url: jdbc:mysql://39.105.95.163:3306/wedding?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
@@ -14,6 +13,11 @@ spring:
 #日志输出环境 对应为logback-spring.xml的springProfile的name 目前默认生产环境 输出info级别到控制台和日志文件
   profiles:
     active: prod
+  # security账户
+  security:
+    user:
+      name: root
+      password: root
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.yyq.wedding.domain

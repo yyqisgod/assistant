@@ -21,6 +21,11 @@
     </properties>
 
     <dependencies>
+        <!--加一波权限-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -53,6 +58,8 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- spring security依赖 -->
+
         <!--swagger注释-->
         <dependency>
             <groupId>io.springfox</groupId>
