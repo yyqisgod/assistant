@@ -1,0 +1,375 @@
+
+body{
+  background-color:#ffffff;
+  font-size:12px;
+  color:#000000;
+  font-family:arial,helvetica,sans-serif;
+  margin:0px 0px 0px 0px;
+}
+
+.bharosaPage{
+ width: 780px;
+ margin: 0px 0px 0px 0px;
+}
+
+.bharosaMessagePage{
+ margin: 30px 0px 0px 0px;
+}
+
+.bharosaPageBody{
+  margin:3px 3px 30px 30px;
+}
+
+.bharosaPageHeader{
+  margin: 0px 0px 0px 0px;
+}
+
+.bharosaPageFooter{
+}
+
+.bharosaPageTitle{
+  font-size: 14px;
+  font-weight: bold;
+  margin:20px 0px 5px 0px;
+}
+
+.bharosaPageMessage{
+  margin:0px 0px 15px 0px;
+}
+
+
+.bharosaLoginMessage{
+  font-size: 14px;
+  font-weight: bold;
+  margin:20px 0px 5px 0px;
+}
+
+.bharosaLoginMessage .advance{
+  font-size: 9px;
+  color: #333333;
+}
+
+.bharosaPageBody .signOn {
+  width:320px;
+  background-color:#ffffff;
+  border-top: 1px;
+  border-left: 1px;
+  border-bottom: 1px;
+  border-right: 1px;
+  border-color: #94B183;
+  border-style: none;
+  padding: 0px 8px 0px 0px;
+}
+
+.bharosaPageBody .signOn#userInfo {
+  width:430px;
+}
+
+.bharosaPageBody input[type=text] {width: 150px;}
+.bharosaPageBody input[type=password] {width: 150px;}
+.bharosaPageBody input[type=radio], .bharosaPageBody input[type=checkbox] {}
+
+.bharosaPageBody .changePasswordInput input[type=text] {width: 150px;margin-left: 100px;}
+.bharosaPageBody .changePasswordInput input[type=radio], .bharosaPageBody .changePasswordInput input[type=checkbox] { margin-left: 238px; }
+
+.bharosaPageBody .signOn ul.credsList {margin-left: 0px; padding-left: 0px;}
+.bharosaPageBody .signOn ul.credsList li {list-style: none; list-style-type: none;}
+.bharosaPageBody .signOn label {font-weight:bold;float:left;width:140px;}
+.bharosaPageBody .signOn#userInfo label {font-weight:bold;float:left;width:240px;}
+.bharosaPageBody .signOn#userInfo label.checkLabel {font-weight:bold;width:100%;float:none}
+.bharosaPageBody .signOn input {margin-bottom: 3px;}
+.bharosaPageBody .signOn input[type=checkbox] {margin-bottom: 5px;margin-right: 5px;margin-left: 3px;float:left}
+.bharosaPageBody .signOn select {margin-bottom: 3px;}
+.bharosaPageBody .signOn input[type=text] {width: 150px;}
+.bharosaPageBody .signOn .authenticator {margin-top:20px;}
+.bharosaPageBody .signOn a:link,.signOn a:visited {color:#25547c}
+.bharosaPageBody .signOn a:active,.signOn a:hover {color:#4986ff}
+
+.bharosaPageBody .signOn .loginButton {
+  width: 75px;
+  margin:10px 25px 0px 0px;
+  float:right;
+}
+
+.bharosaPageBody ul.links {
+  clear: both;
+  font-size: 10px;
+  margin:15px 0px 0px 0px;
+  padding:15px 0px 0px 0px;
+}
+
+.bharosaPageBody ul.links li {
+  text-align:center;
+  list-style: none;
+}
+
+.bharosaPageBody .loginError {
+  border-left:1px;
+  border-right:1px;
+  border-top:1px;
+  border-bottom:2px;
+  border-color:#990000;
+  border-style:solid;
+  margin:0px 3px 3px 0px;
+
+  font-size:8pt;
+  padding:1px;
+}
+
+.bharosaPageBody .loginError img{
+  margin:3px 3px 3px 3px;
+}
+
+.registerSection{
+  border-left:0px;
+  border-right:0px;
+  border-top:1px;
+  border-bottom:0px;
+  border-color:#000000;
+  border-style:solid;
+  margin:0px 0px 20px 0px;
+  padding: 10px 0px 25px 0px;
+}
+
+img.registerSpacer{
+  height: 80px;
+  width: 1px;
+}
+
+.sectionTitle{
+  font-size: 13px;
+  font-weight: bold;
+  margin:10px 0px 10px 0px;
+}
+
+.sectionSubTitle{
+  font-weight: bold;
+}
+
+.sectionBody{
+  width: 50%;
+}
+
+.sectionImage{
+  float:right;
+  width: 280px;
+  height: 100px;
+  margin:0px 5px 0px 0px;
+}
+
+.registerSubmit{
+  font-size: 12px;
+  font-weight: bold;
+  border-left:1px;
+  border-right:1px;
+  border-top:1px;
+  border-bottom:1px;
+  border-color:#000000;
+  border-style:solid;
+  margin:10px 0px 10px 0px;
+  padding: 3px 3px 3px 3px;
+  text-align: right;
+}
+
+.registerSubmit .submitButton{
+  font-size: 11px;
+  width: 80px;
+
+}
+
+
+.registerQuestionsLabel{
+  font-size: 13px;
+  font-weight: bold;
+  background-color: #ffffff;
+  padding: 6px 6px 6px 0px;
+  margin: 0px 0px 3px 0px;
+  width: 10px;
+  /*
+  float: left;
+  */
+}
+
+.registerQuestionsSelect{
+  font-size: 12px;
+  width: 450px;
+}
+
+.registerQuestionsInput{
+  font-size: 12px;
+  width: 500px;
+}
+
+.registerQuestionsInputSelected{
+  height:32px;
+  background:center repeat-x url("../images/UIO_arrow_shaft.gif");
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.registerQuestionsArrow{
+  width: 25px;
+  height: 30px;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.registerQuestionsArrowSelected{
+  width: 20px;
+  height: 32px;
+  background-image: url('../images/UIO_arrow_head.gif');
+  background-repeat: no-repeat;
+  background-position: left;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  /*
+  float:right;
+  */
+}
+
+.registerQuestions{
+
+}
+
+.registerQuestions .questions{
+}
+
+.registerQuestions .questions .question{
+  border: white solid 1px;
+  margin:30px 0px 30px 0px;
+}
+
+.registerAuthenticatorImage{
+}
+
+.registerAuthenticatorImage .demoAuthenticator{
+}
+
+.registerAuthenticatorImage .demoAuthenticatorDivider{
+  font-weight: bold;
+  background-image: url('../images/device_arrow_left.gif');
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.registerAuthenticatorImage .demoAuthenticatorMessage{
+  margin: 20px 0px 20px 0px;
+}
+
+.passwordDevice {
+    
+}
+
+.challengeChoice{
+    margin-bottom: 60px;
+}
+
+.challengeOption{
+    margin: 10px 0px 10px 0px;
+}
+
+.challengeUser{
+    
+}
+
+.challengeUser .question{
+    margin-bottom: 30px;
+}
+
+
+.changePasswordLabel{
+  font-size: 11px;
+  font-weight: bold;
+  background-color: #ffffff;
+  padding: 6px 6px 6px 0px;
+  margin: 0px 0px 3px 0px;
+  text-align: left;
+}
+
+.changePasswordLabelSelected{
+  font-size: 11px;
+  font-weight: bold;
+  background-color: #ffffff;
+  padding: 6px 6px 6px 0px;
+  margin: 0px 0px 3px 0px;
+  text-align: left;
+  background:center repeat-x url("../images/UIO_arrow_shaft.gif");
+}
+
+.changePasswordInput{
+  width: 250px;
+  text-align: center;
+  /*
+  background-color: #D9DAC8;
+  margin: 6px 0px 6px 0px;
+*/
+}
+
+.changePasswordInputSelected{
+  width: 250px;
+  text-align: center;
+  background:center repeat-x url("../images/UIO_arrow_shaft.gif");
+}
+
+.changePasswordInput a:link, .changePasswordInput a:visited, .changePasswordInput a:active, .changePasswordInput a:hover  {font-size: 9px; color:#000000; text-decoration: none;}
+.changePasswordInputSelected a:link, .changePasswordInputSelected a:visited, .changePasswordInputSelected a:active, .changePasswordInputSelected a:hover  {font-size: 9px; color:#000000; text-decoration: none;}
+
+.changePasswordInput .message{color: #000000;}
+.changePasswordInputSelected .message{color: #000000;}
+
+.changePasswordInput .error{color: #ff0000;}
+.changePasswordInputSelected .error{color: #ff0000;}
+
+.changePasswordInput .success{color: #00ff00;}
+.changePasswordInputSelected .success{color: #00ff00;}
+
+.changePasswordArrow{
+  width: 20px;
+  height: 30px;
+}
+
+.changePasswordArrowSelected{
+  width: 20px;
+  height: 32px;
+  background-image: url('../images/UIO_arrow_head.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  /*
+  float:right;
+  */
+}
+
+.required{
+  color: #ff0000;
+  font-size:14px; 
+}
+
+/*.bharosaPageBody span.deviceSpan {display: inline-block;}*/
+
+.footerText { 
+  font-size:10px;
+  color:#000000;
+  font-family:arial,helvetica,sans-serif;
+}
+
+.style1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+}
+.style3 {font-size: 11px; font-family: Verdana, Arial, Helvetica, sans-serif;}
+.style5 {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; }
+
+span#passPolicyTitle {font-weight: bold;}
+div#passPolicy ul {margin-top: 0px; }
+div#passPolicy ul li {font-size: 10px;}
+
+.bharosaPage .imageheader  {
+margin-top: 0px;
+margin-left: 0px;
+background-image: url('../images/Oracle_header.gif');
+background-repeat: no-repeat;
+height:65px;
+}
