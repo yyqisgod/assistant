@@ -218,9 +218,7 @@
             <h2>登录</h2>
 
 
-            <div id="signOnCreds">
-                <form  name="signon" id="signon"
-                      action="/form" method="post">
+                <form action="/form" method="post">
                     <input type="hidden" id="clientOffset" name="clientOffset" value="8">
                     <input type="hidden" id="fk" name="fk"
                            value="4206718_87f11f60d0cd4d95be0c763ad6d33d00560d67fdb522d44496a596a5ea588a2d">
@@ -257,21 +255,20 @@
                         </li>
                     </ul>
                     <div class="cb41w7">
-            <span id="required" class="error-hide">
+           <%-- <span id="required" class="error-hide">
                 <div class="cb41error">
                     请输入您的用户名和密码
                 </div>
-            </span>
+            </span>--%>
 
                     </div>
                     <li>
                         <div class="cb41w4">
                            <%-- <span><input type="submit" id="signin_button" class="signin_button" tabindex="3" value="登录"></span>--%>
-                            <span><input type="submit"  value="登录"></span>
+                            <input type="submit"  value="登录">
                         </div>
                     </li>
                 </form>
-            </div>
         </div>
 
 
