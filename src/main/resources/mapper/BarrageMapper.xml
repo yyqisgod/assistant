@@ -4,17 +4,15 @@
     <insert id="save" parameterType="com.yyq.wedding.domain.pojo.Barrage">
         INSERT INTO barrage(
             color,
-            text,
-            size,
-            time,
-            position
+            info,
+            img,
+            href
             )
             VALUES (
             #{color},
-            #{text},
-            #{size},
-            #{time},
-            #{position}
+            #{info},
+            #{img},
+            #{href}
             )
     </insert>
 
@@ -22,10 +20,9 @@
         SELECT
             id,
             color,
-            text,
-            size,
-            time,
-            position
+            info,
+            img,
+            href
         FROM
             barrage
     </select>

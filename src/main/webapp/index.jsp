@@ -20,24 +20,6 @@
             text-decoration: none;
         }
 
-        .form-control{
-            display: inline-block;
-            width: auto;
-            padding: 6px 12px;
-            font-size: 14px;
-            line-height: 1.42857143;
-            color: #555;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-        }
-
         .btn{
             display: inline-block;
             padding: 6px 12px;
@@ -66,22 +48,6 @@
             border-color: #2e6da4;
         }
 
-        /*组件主样式*/
-        .overflow-text{
-            display: block;
-            white-space:nowrap;
-            overflow:hidden;
-            text-overflow:ellipsis;
-            opacity:0;
-            clear: both;
-            padding:3px 10px;
-            border-radius: 10px;
-            box-sizing: border-box;
-            max-width: 100%;
-            color:#fff;
-            animation:colorchange 3s infinite alternate;
-            -webkit-animation:colorchange 3s infinite alternate; /*Safari and Chrome*/
-        }
         @keyframes colorchange{
             0%{
                 color:red;
@@ -93,10 +59,14 @@
                 color:#6993f9;
             }
         }
-        /*组件主样式*/
 
     </style>
     <link rel="stylesheet" type="text/css" href="photos/dist/partialviewslider.min.css">
+    <link rel="stylesheet" type="text/css" href="jquery.barrager.js-master/static/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="jquery.barrager.js-master/static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="jquery.barrager.js-master/dist/css/barrager.css">
+    <link rel="stylesheet" type="text/css" href="jquery.barrager.js-master/static/pick-a-color/css/pick-a-color-1.2.3.min.css">
+    <link type="text/css" rel="stylesheet" href="jquery.barrager.js-master/static/syntaxhighlighter/styles/shCoreDefault.css"/>
 </head>
 <body>
     <ul id="partial-view" style="height: 100%;">
@@ -165,8 +135,14 @@
         </div>
     </div>
 </body>
-<script src="jquery.min.js"></script>
-<script src="jquery.danmu.js-master/dist/jquery.danmu.min.js"></script>
+<script type="text/javascript" src="jquery.barrager.js-master/static/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="jquery.barrager.js-master/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery.barrager.js-master/static/js/tinycolor-0.9.15.min.js"></script>
+<script type="text/javascript" src="jquery.barrager.js-master/dist/js/jquery.barrager.js"></script>
+<script type="text/javascript" src="jquery.barrager.js-master/static/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="jquery.barrager.js-master/static/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="jquery.barrager.js-master/static/syntaxhighlighter/scripts/shBrushPhp.js"></script>
+<script type="text/javascript" src="jquery.barrager.js-master/static/pick-a-color/js/pick-a-color-1.2.3.min.js"></script>
 <script src="jiaoben5835/js/index.js"></script>
 <script src="photos/dist/partialviewslider.min.js"></script>
 <script src="danmu.js"></script>
@@ -212,52 +188,41 @@
         /* 当前播放曲目的对象 */
         //console.log(audioFn.audio);
     });
-    //弹幕初始化
-    var offsetWid = document.documentElement.clientWidth;
-    var offsetHei = document.documentElement.clientHeight;
-    if (/(Android)/i.test(navigator.userAgent)){     // 判断是否为Android手机
-        offsetWid = screen.width;
-        offsetHei = screen.height;
-    }else if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)){  // 判断是否为苹果手机
-        offsetWid=document.documentElement.clientWidth;
-        offsetHei=document.documentElement.clientHeight;
-    }
-    $("#danmu").danmu({
-        height: offsetHei ,  //弹幕区高度
-        width: offsetWid,   //弹幕区宽度
-        zindex :100,   //弹幕区域z-index属性
-        speed:7000,      //滚动弹幕的默认速度，这是数值值得是弹幕滚过每672像素所需要的时间（毫秒）
-        sumTime:65535,   //弹幕流的总时间
-        danmuLoop:false,   //是否循环播放弹幕
-        defaultFontColor:"#FFFFFF",   //弹幕的默认颜色
-        fontSizeSmall:16,     //小弹幕的字号大小
-        FontSizeBig:24,       //大弹幕的字号大小
-        opacity:"0.9",			//默认弹幕透明度
-        topBottonDanmuTime:6000,   // 顶部底部弹幕持续时间（毫秒）
-        SubtitleProtection:false,     //是否字幕保护
-        positionOptimize:false,         //是否位置优化，位置优化是指像AB站那样弹幕主要漂浮于区域上半部分
-        maxCountInScreen: 40,   //屏幕上的最大的显示弹幕数目,弹幕数量过多时,优先加载最新的。
-        maxCountPerSec: 10      //每分秒钟最多的弹幕数目,弹幕数量过多时,优先加载最新的。
-    });
 
     //后台获取所有弹幕并播放
     $.get("/barrage/list", function (data) {
-        $('#danmu').danmu("addDanmu", data);//添加弹幕
-        $('#danmu').danmu('danmuStart');//运行
+        //每条弹幕发送间隔
+        var looper_time = 3 * 1000;
+        var items = data;
+        //弹幕总数
+        var total = data.length;
+        //是否首次执行
+        var run_once = true;
+        //弹幕索引
+        var index = 0;
+        //先执行一次
+        barrager();
+        function barrager() {
+            if (run_once) {
+                //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+                looper = setInterval(barrager, looper_time);
+                run_once = false;
+            }
+            //发布一个弹幕
+            $('body').barrager(items[index]);
+            //索引自增
+            index++;
+            //所有弹幕发布完毕，清除计时器。
+            if (index == total) {
+                clearInterval(looper);
+                return false;
+            }
+        }
     });
 
     //点击进去抽奖环节
     $("#submit_barraget").click(function () {
-        /*send_danmu();
-        $("#barrage_content").val("");*/
         window.open("/luckydraw.jsp");
-    })
-    //回车发送弹幕
-    $(window).keydown(function (e) {
-        if(e.keyCode==13){
-            send_danmu();
-            $("#barrage_content").val("");
-        }
     })
 
     $('#partial-view').partialViewSlider({
