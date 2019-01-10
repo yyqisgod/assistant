@@ -6,13 +6,15 @@
             color,
             info,
             img,
-            href
+            href,
+            speed
             )
             VALUES (
             #{color},
             #{info},
             #{img},
-            #{href}
+            #{href},
+            #{speed}
             )
     </insert>
 
@@ -22,7 +24,8 @@
             color,
             info,
             img,
-            href
+            href,
+            speed
         FROM
             barrage
     </select>

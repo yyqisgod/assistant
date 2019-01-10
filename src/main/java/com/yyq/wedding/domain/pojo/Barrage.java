@@ -18,6 +18,8 @@ public class Barrage {
     private String color;
     @ApiModelProperty(value = "头像")
     private String img;
-    @ApiModelProperty(value = "路径")
+    @ApiModelProperty(value = "点击弹幕跳转路径")
     private String href;
+    @ApiModelProperty(value = "弹幕速度")
+    private String speed;
 }
