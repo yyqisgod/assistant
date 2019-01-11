@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.XStream;
 import com.yyq.wedding.domain.pojo.LuckDraw;
 import com.yyq.wedding.domain.pojo.Wechat;
 import com.yyq.wedding.service.ILuckDrawService;
+import com.yyq.wedding.utils.EmojiUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,10 +180,13 @@ public class HomeController {
         str.append("<FromUserName><![CDATA[" + servername + "]]></FromUserName>");
         str.append("<CreateTime>" + returnTime + "</CreateTime>");
         str.append("<MsgType><![CDATA[" + msgType + "]]></MsgType>");
-        if (text.contains("/:") || text.contains("收到不支持的消息类型，暂无法显示")) {
+        if (text.contains("收到不支持的消息类型，暂无法显示")) {
             str.append("<Content><![CDATA[暂时不支持发送表情弹幕]]></Content>");
             text = "新婚快乐";
         } else {
+            if(text.contains("/:")){
+                text = EmojiUtil.getEmojiByWechat(text);
+            }
             str.append("<Content><![CDATA[弹幕\"" + text + "\"发送成功]]></Content>");
         }
         str.append("</xml>");
