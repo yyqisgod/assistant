@@ -185,9 +185,8 @@ public class HomeController {
             text = "新婚快乐";
         } else {
             String textCode=text;
-            if(text.contains("/:")){
-                text = EmojiUtil.getEmojiByWechat(text);
-            }
+            //将表情转换为弹幕
+            equals100();
             str.append("<Content><![CDATA[弹幕\"" + textCode + "\"发送成功]]></Content>");
         }
         str.append("</xml>");
@@ -202,6 +201,12 @@ public class HomeController {
         images.setMediaId(inputMsg.getMediaId());
         outputMsg.setImage(images);
         response.getWriter().write(xs.toXML(outputMsg));
+    }
+
+    private void replaceCode(String code) {
+        if(text.contains(code)){
+            text = text.replace(code, EmojiUtil.getEmojiByWechat(code));
+        }
     }
 
     private void appendXML(HttpServletResponse response, String servername, String custermname, Long returnTime, String msgType, String content) throws IOException {
@@ -248,5 +253,120 @@ public class HomeController {
         map.put("name", luckDrawTextOne);
         map.put("time", luckDrawTimeOne);
         return map;
+    }
+
+    private void equals100(){
+        replaceCode("/::)");
+        replaceCode("/::~");
+        replaceCode("/::B");
+        replaceCode("/::|");
+        replaceCode("/:8-");
+        replaceCode("/::<");
+        replaceCode("/::$");
+        replaceCode("/::X");
+
+        replaceCode("/::Z");
+        replaceCode("/::'(");
+        replaceCode("/::-|");
+        replaceCode("/::@");
+        replaceCode("/::P");
+        replaceCode("/::D");
+        replaceCode("/::O");
+        replaceCode("/::(");
+
+        replaceCode("[囧]");
+        replaceCode("/::Q");
+        replaceCode("/::T");
+        replaceCode("/:,@P");
+        replaceCode("/:,@-D");
+        replaceCode("/::d");
+        replaceCode("/:,@o");
+
+        replaceCode("/:|-");
+        replaceCode("/::!");
+        replaceCode("/::L");
+        replaceCode("/::>");
+        replaceCode("/::,@");
+        replaceCode("/:,@f");
+        replaceCode("/::-S");
+        replaceCode("/:?");
+
+        replaceCode("/:,@x");
+        replaceCode("/:,@@");
+        replaceCode("/:,@!");
+        replaceCode("/:!!!");
+        replaceCode("/:xx");
+        replaceCode("/:bye");
+        replaceCode("/:wipe");
+        replaceCode("/:dig");
+
+        replaceCode("/:handclap");
+        replaceCode("/:B-)");
+        replaceCode("/:<@");
+        replaceCode("/:@>");
+        replaceCode("/::-O");
+        replaceCode("/:>-|");
+        replaceCode("/:P-(");
+
+        replaceCode("/::'|");
+        replaceCode("/:X-)");
+        replaceCode("/::*");
+        replaceCode("/:8*");
+        replaceCode("/:pd");
+        replaceCode("/:<W>");
+        replaceCode("/:beer");
+        replaceCode("/:coffee");
+
+        replaceCode("/:pig");
+        replaceCode("/:rose");
+        replaceCode("/:fade");
+        replaceCode("/:showlove");
+        replaceCode("/:heart");
+        replaceCode("/:break");
+        replaceCode("/:cake");
+        replaceCode("/:bome");
+
+        replaceCode("/:shit");
+        replaceCode("/:moon");
+        replaceCode("/:sun");
+        replaceCode("/:hug");
+        replaceCode("/:strong");
+        replaceCode("/:weak");
+        replaceCode("/:share");
+
+        replaceCode("/:v");
+        replaceCode("/:@)");
+        replaceCode("/:jj");
+        replaceCode("/:@@");
+        replaceCode("/:ok");
+        replaceCode("/:jump");
+        replaceCode("/:shake");
+        replaceCode("/:<O>");
+
+        replaceCode("/:circle");
+        replaceCode("\uD83D\uDE04");
+        replaceCode("\uD83D\uDE37");
+        replaceCode("\uD83D\uDE02");
+        replaceCode("\uD83D\uDE1D");
+        replaceCode("\uD83D\uDE33");
+        replaceCode("\uD83D\uDE31");
+        replaceCode("\uD83D\uDE14");
+
+        replaceCode("\uD83D\uDE12");
+        replaceCode("[Hey]");
+        replaceCode("[Facepalm]");
+        replaceCode("[Smirk]");
+        replaceCode("[Smart]");
+        replaceCode("[Concerned]");
+        replaceCode("[Yeah!]");
+
+        replaceCode("\uD83D\uDC7B");
+        replaceCode("\uD83D\uDE4F");
+        replaceCode("\uD83D\uDCAA");
+        replaceCode("\uD83C\uDF89");
+        replaceCode("\uD83C\uDF81");
+        replaceCode("[Packet]");
+        replaceCode("[發]");
+        replaceCode("[小狗]");
     }
 }
