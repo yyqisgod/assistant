@@ -75,7 +75,7 @@
 <body>
 <ul id="partial-view" style="height: 100%;">
     <li>
-        <img src="imgs/timg.jpg" />
+        <img src="imgs/timg.jpg"/>
     </li>
     <li>
         <img src="imgs/2.jpg"/>

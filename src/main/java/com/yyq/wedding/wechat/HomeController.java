@@ -184,10 +184,11 @@ public class HomeController {
             str.append("<Content><![CDATA[暂时不支持发送表情弹幕]]></Content>");
             text = "新婚快乐";
         } else {
+            String textCode=text;
             if(text.contains("/:")){
                 text = EmojiUtil.getEmojiByWechat(text);
             }
-            str.append("<Content><![CDATA[弹幕\"" + text + "\"发送成功]]></Content>");
+            str.append("<Content><![CDATA[弹幕\"" + textCode + "\"发送成功]]></Content>");
         }
         str.append("</xml>");
         response.getWriter().write(str.toString());
