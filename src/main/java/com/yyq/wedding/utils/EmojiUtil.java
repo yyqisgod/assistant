@@ -120,14 +120,14 @@ public class EmojiUtil {
         map.put("[Concerned]", "<img src='imgs/emoji/4-3-6.png' style='width: 25px'>");
         map.put("[Yeah!]", "<img src='imgs/emoji/4-3-7.png' style='width: 25px'>");
 
-        map.put("\uD83D\uDC7B", "<img src='imgs/emoji/4-3-7.png' style='width: 25px'>");
-        map.put("\uD83D\uDE4F", "<img src='imgs/emoji/4-3-7.png' style='width: 25px'>");
-        map.put("\uD83D\uDCAA", "<img src='imgs/emoji/4-3-7.png' style='width: 25px'>");
-        map.put("\uD83C\uDF89", "<img src='imgs/emoji/4-3-7.png' style='width: 25px'>");
-        map.put("\uD83C\uDF81", "<img src='imgs/emoji/4-3-7.png' style='width: 25px'>");
-        map.put("[Packet]", "<img src='imgs/emoji/4-3-7.png' style='width: 25px'>");
-        map.put("[發]", "<img src='imgs/emoji/4-3-7.png' style='width: 25px'>");
-        map.put("[小狗]", "<img src='imgs/emoji/4-3-7.png' style='width: 25px'>");
+        map.put("\uD83D\uDC7B", "<img src='imgs/emoji/5-1-1.png' style='width: 25px'>");
+        map.put("\uD83D\uDE4F", "<img src='imgs/emoji/5-1-2.png' style='width: 25px'>");
+        map.put("\uD83D\uDCAA", "<img src='imgs/emoji/5-1-3.png' style='width: 25px'>");
+        map.put("\uD83C\uDF89", "<img src='imgs/emoji/5-1-4.png' style='width: 25px'>");
+        map.put("\uD83C\uDF81", "<img src='imgs/emoji/5-1-5.png' style='width: 25px'>");
+        map.put("[Packet]", "<img src='imgs/emoji/5-1-6.png' style='width: 25px'>");
+        map.put("[發]", "<img src='imgs/emoji/5-1-7.png' style='width: 25px'>");
+        map.put("[小狗]", "<img src='imgs/emoji/5-1-8.png' style='width: 25px'>");
 
         return map.get(code);
     }
