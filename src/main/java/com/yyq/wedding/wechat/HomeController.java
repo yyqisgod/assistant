@@ -184,9 +184,10 @@ public class HomeController {
             str.append("<Content><![CDATA[暂时不支持发送表情弹幕]]></Content>");
             text = "新婚快乐";
         } else {
-            String textCode=text;
+            String textCode = text;
             //将表情转换为弹幕
             equals100();
+            text = "&nbsp" + text;
             str.append("<Content><![CDATA[弹幕\"" + textCode + "\"发送成功]]></Content>");
         }
         str.append("</xml>");
@@ -204,7 +205,7 @@ public class HomeController {
     }
 
     private void replaceCode(String code) {
-        if(text.contains(code)){
+        if (text.contains(code)) {
             text = text.replace(code, EmojiUtil.getEmojiByWechat(code));
         }
     }
@@ -236,7 +237,7 @@ public class HomeController {
         for (int i = 0; i < luckDrawTimeOne; i++) {
             currentTimeMillis = System.currentTimeMillis();
             if (i == 0) {
-                endTime = currentTimeMillis + (luckDrawTimeOne-1)*1000;
+                endTime = currentTimeMillis + (luckDrawTimeOne - 1) * 1000;
             }
             Thread.sleep(1000);
         }
@@ -255,7 +256,7 @@ public class HomeController {
         return map;
     }
 
-    private void equals100(){
+    private void equals100() {
         replaceCode("/::)");
         replaceCode("/::~");
         replaceCode("/::B");
