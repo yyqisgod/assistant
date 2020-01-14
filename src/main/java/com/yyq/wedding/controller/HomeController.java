@@ -10,12 +10,12 @@ import com.yyq.wedding.domain.message.OutputMessage;
 import com.yyq.wedding.service.ILuckDrawService;
 import com.yyq.wedding.utils.EmojiUtil;
 import com.yyq.wedding.utils.SHA1Util;
+import com.yyq.wedding.utils.SensitiveUnit;
 import com.yyq.wedding.utils.SerializeXmlUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,19 +43,11 @@ public class HomeController {
 
     @RequestMapping(value = "chat", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public void liaotian(Model model, HttpServletRequest request, HttpServletResponse response) {
+    public void liaotian(HttpServletRequest request, HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");
         log.info("验证TOKEN" + config.getToken());
         boolean isGet = request.getMethod().toLowerCase().equals("get");
         if (isGet) {
-            String signature = request.getParameter("signature");
-            String timestamp = request.getParameter("timestamp");
-            String nonce = request.getParameter("nonce");
-            String echostr = request.getParameter("echostr");
-            System.out.println(signature);
-            System.out.println(timestamp);
-            System.out.println(nonce);
-            System.out.println(echostr);
             access(request, response);
         } else {
             // 进入POST聊天处理
@@ -79,11 +71,15 @@ public class HomeController {
      */
     private String access(HttpServletRequest request, HttpServletResponse response) {
         // 验证URL真实性
-        System.out.println("进入验证access");
-        String signature = request.getParameter("signature");// 微信加密签名
-        String timestamp = request.getParameter("timestamp");// 时间戳
-        String nonce = request.getParameter("nonce");// 随机数
-        String echostr = request.getParameter("echostr");// 随机字符串
+        log.info("进入验证access");
+        // 微信加密签名
+        String signature = request.getParameter("signature");
+        // 时间戳
+        String timestamp = request.getParameter("timestamp");
+        // 随机数
+        String nonce = request.getParameter("nonce");
+        // 随机字符串
+        String echostr = request.getParameter("echostr");
         List<String> params = new ArrayList<String>();
         params.add(config.getToken());
         params.add(timestamp);
@@ -100,13 +96,13 @@ public class HomeController {
         if (temp.equals(signature)) {
             try {
                 response.getWriter().write(echostr);
-                System.out.println("成功返回 echostr：" + echostr);
+                log.info("认证成功 echostr：{}", echostr);
                 return echostr;
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        //System.out.println("失败 认证");
+        log.info("认证失败");
         return null;
     }
 
@@ -128,10 +124,12 @@ public class HomeController {
         // 将xml内容转换为InputMessage对象
         InputMessage inputMsg = (InputMessage) xs.fromXML(xmlMsg.toString());
 
-        String servername = inputMsg.getToUserName();// 服务端
-        String custermname = inputMsg.getFromUserName();// 客户端
-        long createTime = inputMsg.getCreateTime();// 接收时间
-        Long returnTime = Calendar.getInstance().getTimeInMillis() / 1000;// 返回时间
+        // 服务端
+        String servername = inputMsg.getToUserName();
+        // 客户端
+        String custermname = inputMsg.getFromUserName();
+        // 返回时间
+        Long returnTime = Calendar.getInstance().getTimeInMillis() / 1000;
 
         // 取得消息类型
         String msgType = inputMsg.getMsgType();
@@ -140,11 +138,12 @@ public class HomeController {
         log.info("用户id=============" + sendUsername);
         log.info("发送信息内容=============" + inputMsg.getContent());
         text = inputMsg.getContent();
-        if (text.contains("傻逼") || text.contains("白痴")) {
+
+        //如果含有敏感词，替换成新婚可能
+        if(SensitiveUnit.isSensitive(text)){
             text = "新婚快乐";
-            String content = "婚礼现场！请注意您的素质！！";
+            String content = "婚礼期间请注意言辞";
             appendXML(response, servername, custermname, returnTime, msgType, content);
-            return;
         }
 
         //抽奖一
