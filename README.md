@@ -1,4 +1,4 @@
-# wedding 线上分支
+# wedding V1.0
 婚庆大屏和微信端互动，关注个人微信公众号发送消息，再大屏通过弹幕的形式展示你发送的消息，并且可以通过发送弹幕的形式参与抽奖
 
 ## 项目架构
@@ -19,12 +19,6 @@ maven:3.3.9 tomcat:8.5  jdk:1.8 项目clone推荐采用IDEA
     >>> application.yml中profiles指定输出的类型
 ## 开发环境
     目前均在dev分支开发，再合并到master
-    
-    
-    
-    ![image](https://github.com/yyqisgod/wedding/blob/master/images/heiheihei.png)
-
-
 
 
 

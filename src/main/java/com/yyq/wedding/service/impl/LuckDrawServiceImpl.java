@@ -1,7 +1,7 @@
 package com.yyq.wedding.service.impl;
 
 import com.yyq.wedding.dao.LuckDrawMapper;
-import com.yyq.wedding.domain.pojo.LuckDraw;
+import com.yyq.wedding.domain.entity.LuckDraw;
 import com.yyq.wedding.service.ILuckDrawService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

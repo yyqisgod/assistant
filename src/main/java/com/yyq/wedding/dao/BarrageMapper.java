@@ -1,6 +1,6 @@
 package com.yyq.wedding.dao;
 
-import com.yyq.wedding.domain.pojo.Barrage;
+import com.yyq.wedding.domain.entity.Barrage;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

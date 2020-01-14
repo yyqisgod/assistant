@@ -1,6 +1,6 @@
 package com.yyq.wedding.service;
 
-import com.yyq.wedding.domain.pojo.Barrage;
+import com.yyq.wedding.domain.entity.Barrage;
 
 import java.util.List;
 

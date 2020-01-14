@@ -1,6 +1,6 @@
 package com.yyq.wedding.service;
 
-import com.yyq.wedding.domain.pojo.LuckDraw;
+import com.yyq.wedding.domain.entity.LuckDraw;
 
 /**
  * @author: 布里巴

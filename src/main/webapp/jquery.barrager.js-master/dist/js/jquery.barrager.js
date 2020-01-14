@@ -40,7 +40,7 @@
 
 		}
 		
-		var content = $("<a title='' href='' target='_blank'></a>").appendTo(id + " .barrage_box .p");
+		var content = $("<a style='font-size: 40px' title='' href='' target='_blank'></a>").appendTo(id + " .barrage_box .p");
 		content.attr({
 			'href': barrage.href,
 			'id': barrage.id

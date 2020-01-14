@@ -1,6 +1,6 @@
 package com.yyq.wedding.dao;
 
-import com.yyq.wedding.domain.pojo.LuckDraw;
+import com.yyq.wedding.domain.entity.LuckDraw;
 import org.springframework.stereotype.Repository;
 
 /**
