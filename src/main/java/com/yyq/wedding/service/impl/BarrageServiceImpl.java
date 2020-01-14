@@ -1,7 +1,7 @@
 package com.yyq.wedding.service.impl;
 
 import com.yyq.wedding.dao.BarrageMapper;
-import com.yyq.wedding.domain.pojo.Barrage;
+import com.yyq.wedding.domain.entity.Barrage;
 import com.yyq.wedding.service.IBarrageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

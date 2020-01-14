@@ -1,7 +1,10 @@
-package com.yyq.wedding.utils;
+package com.yyq.wedding.aspect;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -10,8 +13,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.IOException;
 
 /**
  * 日志切面
@@ -23,7 +24,7 @@ public class LogAspect {
     private Logger logger = LoggerFactory.getLogger(getClass().getName());
     private ObjectError error;
 
-    @Pointcut("execution(* com.yyq.wedding.wechat..*.*(..))")
+    @Pointcut("execution(* com.yyq.wedding.annotation..*.*(..))")
     public void webLog() {
     }
 

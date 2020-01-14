@@ -1,4 +1,4 @@
-package com.yyq.wedding.wechat;
+package com.yyq.wedding.utils;
 
 
 import com.thoughtworks.xstream.XStream;
@@ -7,6 +7,7 @@ import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
+import com.yyq.wedding.annotation.XStreamCDATA;
 
 import java.io.Writer;
 import java.lang.reflect.Field;

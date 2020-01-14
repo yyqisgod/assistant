@@ -1,4 +1,4 @@
-package com.yyq.wedding.wechat;
+package com.yyq.wedding.annotation;
 
 
 import java.lang.annotation.ElementType;

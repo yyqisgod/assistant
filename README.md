@@ -19,12 +19,6 @@ maven:3.3.9 tomcat:8.5  jdk:1.8 项目clone推荐采用IDEA
     >>> application.yml中profiles指定输出的类型
 ## 开发环境
     目前均在dev分支开发，再合并到master
-    
-    
-    
-    ![image](https://github.com/yyqisgod/wedding/blob/master/images/heiheihei.png)
-
-
 
 
 

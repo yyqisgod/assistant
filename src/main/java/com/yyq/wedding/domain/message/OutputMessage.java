@@ -1,7 +1,8 @@
-package com.yyq.wedding.wechat;
+package com.yyq.wedding.domain.message;
 
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.yyq.wedding.annotation.XStreamCDATA;
 
 /**
  *

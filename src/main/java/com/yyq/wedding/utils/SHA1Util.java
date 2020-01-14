@@ -1,4 +1,4 @@
-package com.yyq.wedding.wechat;
+package com.yyq.wedding.utils;
 
 /*
  * 微信公众平台(JAVA) SDK
@@ -27,7 +27,7 @@ import java.security.MessageDigest;
  * </p>
  *
  */
-public final class SHA1 {
+public final class SHA1Util {
 
     private static final char[] HEX_DIGITS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
@@ -54,7 +54,7 @@ public final class SHA1 {
             return null;
         }
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA1");
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA1Util");
             messageDigest.update(str.getBytes());
             return getFormattedText(messageDigest.digest());
         } catch (Exception e) {

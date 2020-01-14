@@ -1,14 +1,19 @@
-package com.yyq.wedding.wechat;
+package com.yyq.wedding.controller;
 
 import com.thoughtworks.xstream.XStream;
-import com.yyq.wedding.domain.pojo.LuckDraw;
-import com.yyq.wedding.domain.pojo.Wechat;
+import com.yyq.wedding.domain.entity.Config;
+import com.yyq.wedding.domain.entity.LuckDraw;
+import com.yyq.wedding.domain.entity.Wechat;
+import com.yyq.wedding.domain.message.ImageMessage;
+import com.yyq.wedding.domain.message.InputMessage;
+import com.yyq.wedding.domain.message.OutputMessage;
 import com.yyq.wedding.service.ILuckDrawService;
 import com.yyq.wedding.utils.EmojiUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.yyq.wedding.utils.SHA1Util;
+import com.yyq.wedding.utils.SerializeXmlUtil;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,34 +27,25 @@ import java.io.IOException;
 import java.util.*;
 
 @Controller
+@Slf4j
 @RequestMapping("/wwsw")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class HomeController {
 
     private final ILuckDrawService luckDrawService;
+    private final Config config;
 
-    @Autowired
-    public HomeController(ILuckDrawService luckDrawService) {
-        this.luckDrawService = luckDrawService;
-    }
-
-    @Value("${token}")
-    private String token;
-    @Value("${luckDrawTimeOne}")
-    private long luckDrawTimeOne;//指定抽奖一持续时间
-    @Value("${luckDrawTextOne}")
-    private String luckDrawTextOne;//指定抽奖一需要发送的弹幕
     private static String text;
     private static String sendUsername;
     private static List<Long> codeList = new ArrayList<>();
     private static long currentTimeMillis;
     private static long endTime;
-    private Logger logger = LoggerFactory.getLogger(getClass().getName());//日志
 
     @RequestMapping(value = "chat", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public void liaotian(Model model, HttpServletRequest request, HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");
-        logger.info("验证TOKEN" + token);
+        log.info("验证TOKEN" + config.getToken());
         boolean isGet = request.getMethod().toLowerCase().equals("get");
         if (isGet) {
             String signature = request.getParameter("signature");
@@ -89,7 +85,7 @@ public class HomeController {
         String nonce = request.getParameter("nonce");// 随机数
         String echostr = request.getParameter("echostr");// 随机字符串
         List<String> params = new ArrayList<String>();
-        params.add(token);
+        params.add(config.getToken());
         params.add(timestamp);
         params.add(nonce);
         // 1. 将token、timestamp、nonce三个参数进行字典序排序
@@ -100,7 +96,7 @@ public class HomeController {
             }
         });
         // 2. 将三个参数字符串拼接成一个字符串进行sha1加密
-        String temp = SHA1.encode(params.get(0) + params.get(1) + params.get(2));
+        String temp = SHA1Util.encode(params.get(0) + params.get(1) + params.get(2));
         if (temp.equals(signature)) {
             try {
                 response.getWriter().write(echostr);
@@ -141,8 +137,8 @@ public class HomeController {
         String msgType = inputMsg.getMsgType();
         // 根据消息类型获取对应的消息内容
         sendUsername = inputMsg.getFromUserName();
-        logger.info("用户id=============" + sendUsername);
-        logger.info("发送信息内容=============" + inputMsg.getContent());
+        log.info("用户id=============" + sendUsername);
+        log.info("发送信息内容=============" + inputMsg.getContent());
         text = inputMsg.getContent();
         if (text.contains("傻逼") || text.contains("白痴")) {
             text = "新婚快乐";
@@ -152,7 +148,7 @@ public class HomeController {
         }
 
         //抽奖一
-        if (luckDrawTextOne.equals(text)) {
+        if (config.getLuckDrawTextOne().equals(text)) {
             if (currentTimeMillis <= endTime && currentTimeMillis != 0) {
                 //判断该用户在该期间重复发送过指定弹幕没有，没有将抽奖码存入数据库并返回
                 LuckDraw luckDraw = new LuckDraw();
@@ -234,10 +230,10 @@ public class HomeController {
     @RequestMapping("/getCode")
     @ResponseBody
     public Map<String, Object> getCode() throws InterruptedException {
-        for (int i = 0; i < luckDrawTimeOne; i++) {
+        for (int i = 0; i < config.getLuckDrawTimeOne(); i++) {
             currentTimeMillis = System.currentTimeMillis();
             if (i == 0) {
-                endTime = currentTimeMillis + (luckDrawTimeOne - 1) * 1000;
+                endTime = currentTimeMillis + (config.getLuckDrawTimeOne() - 1) * 1000;
             }
             Thread.sleep(1000);
         }
@@ -251,8 +247,8 @@ public class HomeController {
     @ResponseBody
     public Map<String, Object> msg() {
         Map<String, Object> map = new HashMap<>(2);
-        map.put("name", luckDrawTextOne);
-        map.put("time", luckDrawTimeOne);
+        map.put("name", config.getLuckDrawTextOne());
+        map.put("time", config.getLuckDrawTimeOne());
         return map;
     }
 
