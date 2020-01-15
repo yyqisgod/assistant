@@ -1,14 +1,16 @@
 package com.yyq.wedding.domain.entity;
 
+import com.yyq.wedding.factory.ConfigFactory;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-@Component
+
 @ConfigurationProperties(prefix = "wedding")
 @Data
-@PropertySource(value = "classpath:config.yml", ignoreResourceNotFound = true, encoding = "utf-8")
+@PropertySource(value = "classpath:config.yml", factory = ConfigFactory.class)
+@Component
 public class Config {
 
     /** 微信token全局配置*/

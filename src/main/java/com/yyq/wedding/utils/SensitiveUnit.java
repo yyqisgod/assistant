@@ -1,6 +1,7 @@
 package com.yyq.wedding.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
@@ -26,38 +27,29 @@ public class SensitiveUnit implements Serializable {
     /**
      * 敏感词库
      */
-    private static Set<String> sensitiveWord = new TreeSet();
-    ;
+    private static Set<String> sensitiveWord = new TreeSet<>();
 
     /**
      * 默认的单例，使用自带的敏感词库
      */
-    public static final SensitiveUnit DEFAULT = new SensitiveUnit(
-            new BufferedReader(new InputStreamReader(
-                    ClassLoader.getSystemResourceAsStream("template/sensi_words.txt")
-                    , StandardCharsets.UTF_8)));
+    private static SensitiveUnit DEFAULT;
 
-    /**
-     * 构建一个空的filter
-     *
-     * @author ZhangXiaoye
-     * @date 2017年1月5日 下午4:18:07
-     */
+    static {
+        try {
+            DEFAULT = new SensitiveUnit(new BufferedReader(new InputStreamReader(new ClassPathResource("template/sensi_words.txt").getInputStream(), StandardCharsets.UTF_8)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private SensitiveUnit() {
 
     }
 
     /**
-     * 加载一个文件中的词典，并构建filter<br/>
-     * 文件中，每行一个敏感词条<br/>
-     * <b>注意：</b>读取完成后会调用{@link BufferedReader#close()}方法。<br/>
-     * <b>注意：</b>读取中的{@link IOException}不会抛出
-     *
-     * @param reader
-     * @author ZhangXiaoye
-     * @date 2017年1月5日 下午4:21:06
+     * 读取默认的敏感词词库
      */
-    public SensitiveUnit(BufferedReader reader) {
+    private SensitiveUnit(BufferedReader reader) {
         try {
             for (String line = reader.readLine(); !StringUtils.isEmpty(line); line = reader.readLine()) {
                 sensitiveWord.add(line);
@@ -84,7 +76,7 @@ public class SensitiveUnit implements Serializable {
     public static boolean isSensitive(String work) {
         for (String s : sensitiveWord) {
             boolean contains = work.contains(s);
-            if (contains){
+            if (contains) {
                 return true;
             }
         }
