@@ -264,18 +264,80 @@
                 //构造字符串形式的弹幕对象
                 var text_obj = '{"info":"' + info + '","color":"' + color + '","img":"' + img + '","href":"' + href + '","speed":"' + speed + '"}';
                 $.ajax({
-                     url: "/barrage/save",
-                     type: "POST",
-                     data: text_obj,
-                     contentType: "application/json;charset=utf-8"
-                 });
+                    url: "/barrage/save",
+                    type: "POST",
+                    data: text_obj,
+                    contentType: "application/json;charset=utf-8"
+                });
                 var new_obj = eval('(' + text_obj + ')');       //转化为js对象
                 $('body').barrager(new_obj);    //向插件中添加该danmu对象
             }
             msg = data.text;
             user = data.userId;
         });
-    };
-    window.setInterval(getText, 100);
+    }
 
+    /**
+     * 初始化websocket连接
+     */
+    function initWebSocket() {
+        var websocket = null;
+        if ('WebSocket' in window) {
+            websocket = new WebSocket("ws://47.109.63.90/webSocket");
+        } else {
+            alert("该浏览器不支持websocket！");
+        }
+        websocket.onopen = function (event) {
+            console.log("建立连接");
+            websocket.send('Hello WebSockets!');
+        }
+        websocket.onclose = function (event) {
+            console.log('连接关闭')
+            reconnect(); //尝试重连websocket
+        }
+        //建立通信后，监听到后端的数据传递
+        websocket.onmessage = function (event) {
+            let data = JSON.parse(event.data);
+            //业务处理....
+            if (data.step == 1) {
+                //获取弹幕内容,前缀添加时间修饰
+                var info = data.msg;
+                //随机获取颜色
+                var colors = ["white", "red", "grenn", "blue", "yellow", "brown", "purple", "syan", "gray"];
+                var size = Math.round(Math.random() * (colors.length - 1));
+                var color = colors[size];
+                //随机获取头像
+                var imgs = ["jquery.barrager.js-master/static/img/haha.gif",
+                    "jquery.barrager.js-master/static/img/cute.png",
+                    "jquery.barrager.js-master/static/img/heisenberg.png"];
+                var length = Math.round(Math.random() * (imgs.length - 1));
+                var img = imgs[length];
+                //点击弹幕跳转路径，默认wedding的github路径
+                var href = "";
+                //弹幕移动速度
+                var speed = Math.round(Math.random() * 5) + 10;
+                //构造字符串形式的弹幕对象
+                var text_obj = '{"info":"' + info + '","color":"' + color + '","img":"' + img + '","href":"' + href + '","speed":"' + speed + '"}';
+                var new_obj = eval('(' + text_obj + ')');       //转化为js对象
+                $('body').barrager(new_obj);    //向插件中添加该danmu对象
+            }
+        }
+        websocket.onerror = function () {
+            // notify.warn("websocket通信发生错误！");
+            // initWebSocket()
+        }
+        window.onbeforeunload = function () {
+            websocket.close();
+        }
+
+        // 重连
+        function reconnect() {
+            console.log("正在重连");
+            // 进行重连
+            setTimeout(function () {
+                initWebSocket();
+            }, 1000);
+        }
+    }
+    initWebSocket();
 </script>

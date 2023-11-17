@@ -9,6 +9,7 @@ import com.yyq.wedding.domain.message.InputMessage;
 import com.yyq.wedding.domain.message.OutputMessage;
 import com.yyq.wedding.domain.message.XMLFactoryMessage;
 import com.yyq.wedding.service.ILuckDrawService;
+import com.yyq.wedding.service.WebSocketService;
 import com.yyq.wedding.utils.EmojiUtil;
 import com.yyq.wedding.utils.SHA1Util;
 import com.yyq.wedding.utils.SensitiveUnit;
@@ -30,11 +31,14 @@ import java.util.*;
 @Controller
 @Slf4j
 @RequestMapping("/wwsw")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class WeChatController {
 
     private final ILuckDrawService luckDrawService;
     private final Config config;
+    private final WebSocketService webSocketService;
+
+    private String token = "wxed71f0accde4d94e";
 
     private static String text;
     private static String sendUsername;
@@ -46,7 +50,6 @@ public class WeChatController {
     @ResponseBody
     public void liaotian(HttpServletRequest request, HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");
-        log.info("验证TOKEN" + config.getToken());
         boolean isGet = request.getMethod().toLowerCase().equals("get");
         if (isGet) {
             access(request, response);
@@ -82,16 +85,11 @@ public class WeChatController {
         // 随机字符串
         String echostr = request.getParameter("echostr");
         List<String> params = new ArrayList<String>();
-        params.add(config.getToken());
+        params.add(token);
         params.add(timestamp);
         params.add(nonce);
         // 1. 将token、timestamp、nonce三个参数进行字典序排序
-        Collections.sort(params, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.compareTo(o2);
-            }
-        });
+        params.sort(String::compareTo);
         // 2. 将三个参数字符串拼接成一个字符串进行sha1加密
         String temp = SHA1Util.encode(params.get(0) + params.get(1) + params.get(2));
         if (temp.equals(signature)) {
@@ -140,7 +138,7 @@ public class WeChatController {
         log.info("发送信息内容=============" + inputMsg.getContent());
         text = inputMsg.getContent();
 
-        //如果含有敏感词，替换成新婚可能
+        // 如果含有敏感词，替换成新婚可能
         if (SensitiveUnit.isSensitive(text)) {
             text = "新婚快乐";
             String content = "婚礼期间请注意言辞";
@@ -148,10 +146,10 @@ public class WeChatController {
             return;
         }
 
-        //抽奖一
+        // 抽奖一
         if (config.getLuckDrawTextOne().equals(text)) {
             if (currentTimeMillis <= endTime && currentTimeMillis != 0) {
-                //判断该用户在该期间重复发送过指定弹幕没有，没有将抽奖码存入数据库并返回
+                // 判断该用户在该期间重复发送过指定弹幕没有，没有将抽奖码存入数据库并返回
                 LuckDraw luckDraw = new LuckDraw();
                 luckDraw.setUserId(sendUsername);
                 long code = luckDrawService.lotteryCode(luckDraw);
@@ -182,12 +180,14 @@ public class WeChatController {
             text = "新婚快乐";
         } else {
             String textCode = text;
-            //将表情转换为弹幕
+            // 将表情转换为弹幕
             text = EmojiUtil.formatEmojiImg(text);
             str.append("<Content><![CDATA[弹幕\"" + textCode + "\"发送成功]]></Content>");
         }
         str.append("</xml>");
         response.getWriter().write(str.toString());
+
+        webSocketService.sendMessage(text);
 
         OutputMessage outputMsg = new OutputMessage();
         outputMsg.setFromUserName(servername);

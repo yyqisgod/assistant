@@ -54,7 +54,7 @@ public final class SHA1Util {
             return null;
         }
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA1Util");
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA1");
             messageDigest.update(str.getBytes());
             return getFormattedText(messageDigest.digest());
         } catch (Exception e) {
